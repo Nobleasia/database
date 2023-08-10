@@ -1,6 +1,0 @@
-export * from "./usePICTableColumns"
-export * from "./usePICRoleTableColumns"
-export * from "./usePICCompaniesTableColumns"
-export * from "./useAreaTableColumns"
-export * from "./usePaymentTermsTableColumns"
-export * from "./useFacilitiesTableColumns"

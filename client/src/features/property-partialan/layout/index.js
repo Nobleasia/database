@@ -1,5 +1,0 @@
-export * from "./apartment-detail-layout"
-export * from "./home-detail-layout"
-export * from "./office-detail-layout"
-export * from "./land-detail-layout"
-export * from "./view-public-layout"
