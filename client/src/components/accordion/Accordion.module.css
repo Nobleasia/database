@@ -1,0 +1,93 @@
+.AccordionRoot {
+  @apply rounded-md;
+}
+
+.AccordionItem {
+  @apply overflow-hidden;
+}
+
+.AccordionItem:last-child,
+.AccordionItem:first-child {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.AccordionItem:focus-within {
+  @apply relative z-[1];
+}
+
+.AccordionHeader,
+.AccordionTrigger {
+  @apply flex;
+}
+
+.AccordionTrigger {
+  @apply flex cursor-pointer items-center justify-between bg-transparent;
+}
+
+.AccordionTrigger:hover {
+  /* background-color: var(--mauve2); */
+}
+
+.AccordionContent {
+  @apply overflow-hidden;
+  /* font-size: 15px; */
+  /* color: var(--mauve11);
+  background-color: var(--mauve2); */
+}
+
+.AccordionContent[data-state="open"] {
+  -webkit-animation: slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1);
+  animation: slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1);
+}
+.AccordionContent[data-state="closed"] {
+  -webkit-animation: slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1);
+  animation: slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.AccordionContentText {
+}
+
+.AccordionChevron {
+  transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.AccordionTrigger[data-state="open"] > .AccordionChevron {
+  transform: rotate(180deg);
+}
+
+@-webkit-keyframes slideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@-webkit-keyframes slideUp {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
