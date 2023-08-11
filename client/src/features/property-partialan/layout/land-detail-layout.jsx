@@ -31,7 +31,13 @@ export const LandDetail = ({
 
         {publicAttributes.available && (
           <section className="border-top-1 my-6 flex w-full items-center justify-center gap-2 border-b-1 border-t-1 border-npa-neutral-300 py-6 md:flex-col xl:flex-row">
-            <span className="flex items-center justify-center rounded-md bg-npa-success-600/30 py-1 px-3 text-npa-success-900">
+            <span
+              className={`flex items-center justify-center rounded-md  py-1 px-3  ${
+                publicAttributes.available === "Yes"
+                  ? "bg-npa-success-600/30 text-npa-success-900"
+                  : "bg-npa-error-600/30 text-npa-error-900"
+              }`}
+            >
               {publicAttributes.available === "Yes"
                 ? "Available"
                 : "Not Available"}
