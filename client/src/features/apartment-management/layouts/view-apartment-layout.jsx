@@ -310,7 +310,7 @@ export const ViewApartmentLayout = ({ children }) => {
                         : `${convertNumberToPriceFormat(
                             apartmentAttributes.rental_price,
                             apartmentAttributes.price_currency
-                          )} /mo`}
+                          )} /month`}
                     </h2>
                     <p className="font-medium md:w-10/12 md:text-sm lg:text-base">
                       {apartmentAttributes.address || "-"}
@@ -353,7 +353,7 @@ export const ViewApartmentLayout = ({ children }) => {
                           Rental Price
                         </h4>
                         <p className="font-medium">
-                          {apartmentAttributes.convertedPrices.rentalPrice} /mo
+                          {apartmentAttributes.convertedPrices.rentalPrice} /month
                         </p>
                       </div>
                     </div>
