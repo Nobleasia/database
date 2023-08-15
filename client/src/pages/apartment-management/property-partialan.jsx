@@ -149,8 +149,6 @@ const PropertyPartialan = ({ columns }) => {
     return groups
   }, {})
 
-  console.log(selectedPhotos)
-
   const handlePublicLink = async () => {
     handleToggleToast({
       open: true,

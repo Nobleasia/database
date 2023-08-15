@@ -1,6 +1,6 @@
-import { flexRender } from "@tanstack/react-table";
-import cn from "classnames";
-import { RxCaretDown, RxCaretSort, RxCaretUp } from "react-icons/rx";
+import { flexRender } from "@tanstack/react-table"
+import cn from "classnames"
+import { RxCaretDown, RxCaretSort, RxCaretUp } from "react-icons/rx"
 
 import {
   Loader,
@@ -10,18 +10,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components";
+} from "@/components"
 
 const HomeTableCell = ({ children }) => {
   return (
     <TableData className="max-h-24 w-44 px-6 py-4 text-sm text-npa-neutral-700">
       <span className="line-clamp-4">{children}</span>
     </TableData>
-  );
-};
+  )
+}
 
 export const HomeTable = ({ isLoading, table }) => {
-  // console.log(table.getPreFilteredRowModel(), "table");
   return (
     <div className="relative">
       {isLoading && (
@@ -100,7 +99,7 @@ export const HomeTable = ({ isLoading, table }) => {
                         cell.getContext()
                       )}
                     </HomeTableCell>
-                  );
+                  )
                 })}
               </TableRow>
             ))}
@@ -108,5 +107,5 @@ export const HomeTable = ({ isLoading, table }) => {
         </Table>
       </div>
     </div>
-  );
-};
+  )
+}

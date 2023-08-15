@@ -21,7 +21,6 @@ const ApartmentTableCell = ({ children }) => {
 };
 
 export const ApartmentTable = ({ isLoading, table }) => {
-  // console.log(table.getPreFilteredRowModel(), "table");
   return (
     <div className="relative">
       {isLoading && (

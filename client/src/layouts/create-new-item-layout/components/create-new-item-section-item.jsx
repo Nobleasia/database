@@ -1,6 +1,6 @@
-import cn from "classnames";
-import Link from "next/link";
-import { MdCheck } from "react-icons/md";
+import cn from "classnames"
+import Link from "next/link"
+import { MdCheck } from "react-icons/md"
 
 export const CreateNewItemSectionItem = ({
   to,
@@ -12,7 +12,6 @@ export const CreateNewItemSectionItem = ({
   numberOfSection,
   onCurrentActiveSection,
 }) => {
-  console.log(root, sectionRoot);
   return (
     <Link
       className={cn("flex items-center gap-3 font-medium", {
@@ -50,5 +49,5 @@ export const CreateNewItemSectionItem = ({
         {sectionTitle}
       </h3>
     </Link>
-  );
-};
+  )
+}

@@ -333,37 +333,28 @@ const Information = ({ available, ownership, zone }) => {
 
       <LandManagementGroupInput>
         <AddLandLabel htmlFor="ownership">Ownership</AddLandLabel>
-
         <Controller
           control={control}
           name="ownership"
           render={({ field, fieldState: { isTouched, error } }) => (
-            <Select
-              {...field}
-              id="ownership"
-              placeholder="Select a ownership type ..."
-              disabled={isSubmitting}
-              isError={error}
-              isSubmitted={isSubmitted}
-              isTouched={isTouched}
-              value={field.value}
-              defaultValue={field.value}
-              onValueChange={field.onChange}
-            >
-              <SelectItemDefault value="">
-                Choose a ownership type ...
-              </SelectItemDefault>
-
-              {ownership.map(({ id, label, value }) => (
-                <SelectItem
-                  key={`select-ownership-${value}-${id}`}
-                  value={value}
-                  selected={field.value === value && label}
-                >
-                  {label}
-                </SelectItem>
-              ))}
-            </Select>
+            <>
+              <InputField
+                {...field}
+                type="ownership"
+                id="ownership"
+                placeholder="Ownership"
+                disabled={isSubmitting}
+                isSubmitted={isSubmitted}
+                isTouched={isTouched}
+                isError={error}
+                onChange={(event) => {
+                  field.onChange(event.target.value)
+                }}
+              />
+              <LandManagementCustomPlaceholder>
+                Example: -
+              </LandManagementCustomPlaceholder>
+            </>
           )}
         />
       </LandManagementGroupInput>

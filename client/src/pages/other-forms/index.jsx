@@ -193,8 +193,6 @@ const OtherFormsManagement = () => {
     fetcherConfig
   )
 
-  console.log(facilitiesData)
-
   const toastState = useMemo(() => {
     return { ...toast }
   }, [toast])

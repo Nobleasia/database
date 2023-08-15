@@ -9,7 +9,6 @@ export const generateExcel = async (
   instance,
   watchSelectedColumns
 ) => {
-  console.log(data)
   const dataArray = data?.data?.attributes ?? []
 
   const headerColorCode = "B4C6E7"

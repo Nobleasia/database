@@ -1,21 +1,21 @@
-import { useRouter } from "next/router";
-import { useMemo } from "react";
-import { useForm } from "react-hook-form";
+import { useRouter } from "next/router"
+import { useMemo } from "react"
+import { useForm } from "react-hook-form"
 
-import { CreateNewItemLayout, getAdminLayout } from "@/layouts";
+import { CreateNewItemLayout, getAdminLayout } from "@/layouts"
 
-import { useAuth, useAxiosPrivate, useHandleToast } from "@/hooks";
+import { useAuth, useAxiosPrivate, useHandleToast } from "@/hooks"
 
-import { Toast, ToastProvider, ToastViewport } from "@/components";
+import { Toast, ToastProvider, ToastViewport } from "@/components"
 
-import { convertToFormData } from "@/utils";
+import { convertToFormData } from "@/utils"
 
 const STEPS_OBJECT = {
   1: "First Step",
   2: "Second Step",
   3: "Third Step",
   4: "Fourth Step",
-};
+}
 
 const ADD_LAND_SECTION_ITEMS = [
   {
@@ -38,13 +38,13 @@ const ADD_LAND_SECTION_ITEMS = [
     sectionTitle: "Photos",
     to: "photos",
   },
-];
+]
 
 const AddLandLayout = ({ children }) => {
-  const { toast, handleToggleToast } = useHandleToast();
-  const instance = useAxiosPrivate();
-  const { auth } = useAuth();
-  const { replace } = useRouter();
+  const { toast, handleToggleToast } = useHandleToast()
+  const instance = useAxiosPrivate()
+  const { auth } = useAuth()
+  const { replace } = useRouter()
   const methods = useForm({
     mode: "onSubmit",
     defaultValues: {
@@ -86,27 +86,25 @@ const AddLandLayout = ({ children }) => {
         },
       ],
     },
-  });
+  })
 
   const toastState = useMemo(() => {
-    return { ...toast };
-  }, [toast]);
+    return { ...toast }
+  }, [toast])
 
   const onSubmit = async ({ images, ...payload }) => {
-    delete payload.taxFees;
+    delete payload.taxFees
 
-    const { ...othersPayload } = payload;
+    const { ...othersPayload } = payload
 
     const payloadData = {
       ...othersPayload,
-    };
+    }
 
-    console.log(payloadData);
-
-    const formData = convertToFormData(payloadData);
+    const formData = convertToFormData(payloadData)
     images.forEach(async (image) => {
-      formData.append("images", image.file);
-    });
+      formData.append("images", image.file)
+    })
 
     const { data } = await instance.post(
       process.env.NEXT_PUBLIC_ENDPOINT_LAND_CREATE,
@@ -117,27 +115,27 @@ const AddLandLayout = ({ children }) => {
           "Content-Type": "multipart/form-data",
         },
       }
-    );
+    )
 
     if (data.status === "CREATED" && data.code === 201) {
       handleToggleToast({
         open: true,
         message: "Land has been created",
         variant: "success",
-      });
-      replace("/land-management");
+      })
+      replace("/land-management")
     }
-  };
+  }
 
   const onError = (error) => {
-    const errorResponse = error?.response?.data?.errors;
+    const errorResponse = error?.response?.data?.errors
     handleToggleToast({
       open: true,
       message: errorResponse
         ? Object.values(errorResponse).join(", ")
         : "Something went wrong!",
       variant: "error",
-    });
+    })
     methods.reset(
       (formValues) => ({
         ...formValues,
@@ -150,8 +148,8 @@ const AddLandLayout = ({ children }) => {
         keepIsValid: true,
         keepDefaultValues: false,
       }
-    );
-  };
+    )
+  }
 
   return (
     <ToastProvider swipeDirection="right" duration={5000}>
@@ -177,18 +175,18 @@ const AddLandLayout = ({ children }) => {
               message: "",
               variant: "",
               open: false,
-            });
+            })
           }}
         />
       )}
 
       <ToastViewport />
     </ToastProvider>
-  );
-};
+  )
+}
 
 export const getAddLandLayout = (page) => {
-  return getAdminLayout(<AddLandLayout>{page}</AddLandLayout>);
-};
+  return getAdminLayout(<AddLandLayout>{page}</AddLandLayout>)
+}
 
-export default AddLandLayout;
+export default AddLandLayout

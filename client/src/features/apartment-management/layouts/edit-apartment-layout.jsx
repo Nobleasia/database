@@ -236,7 +236,6 @@ export const EditApartmentLayout = ({ children }) => {
         )
 
         const apartmentData = response.data.data.attributes.records[0]
-        console.log(apartmentData)
 
         if (Object.keys(apartmentData).length > 0) {
           const {

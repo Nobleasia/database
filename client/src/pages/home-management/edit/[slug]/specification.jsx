@@ -1,4 +1,4 @@
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form"
 
 import {
   AlertInputError,
@@ -7,16 +7,16 @@ import {
   Select,
   SelectItem,
   SelectItemDefault,
-} from "@/components";
+} from "@/components"
 
-import { stringToNumber } from "@/utils";
+import { stringToNumber } from "@/utils"
 
 import {
   AddHomeLabel,
   HomeManagementCustomPlaceholder,
   HomeManagementGroupInput,
   getEditHomeLayout,
-} from "@/features/home-management";
+} from "@/features/home-management"
 
 const Specification = ({ furnishing, houseType, backyard, swimmingPool }) => {
   const {
@@ -24,7 +24,7 @@ const Specification = ({ furnishing, houseType, backyard, swimmingPool }) => {
     setError,
     clearErrors,
     formState: { isSubmitting, isSubmitted },
-  } = useFormContext();
+  } = useFormContext()
 
   return (
     <>
@@ -45,7 +45,7 @@ const Specification = ({ furnishing, houseType, backyard, swimmingPool }) => {
                 isTouched={isTouched}
                 isError={error}
                 onChange={(event) => {
-                  field.onChange(stringToNumber(event.target.value));
+                  field.onChange(stringToNumber(event.target.value))
                 }}
               />
               <HomeManagementCustomPlaceholder>
@@ -73,7 +73,7 @@ const Specification = ({ furnishing, houseType, backyard, swimmingPool }) => {
                 isTouched={isTouched}
                 isError={error}
                 onChange={(event) => {
-                  field.onChange(stringToNumber(event.target.value));
+                  field.onChange(stringToNumber(event.target.value))
                 }}
               />
               <HomeManagementCustomPlaceholder>
@@ -107,19 +107,19 @@ const Specification = ({ furnishing, houseType, backyard, swimmingPool }) => {
                 isTouched={isTouched}
                 isError={error}
                 onChange={(event) => {
-                  const { value } = event.target;
+                  const { value } = event.target
 
-                  const isCustomInvalid = /[^a-zA-Z0-9 ]+/.test(value);
+                  const isCustomInvalid = /[^a-zA-Z0-9 ]+/.test(value)
                   if (isCustomInvalid) {
                     setError("stories", {
                       type: "custom",
                       message: "Stories must not contain special characters",
-                    });
+                    })
                   } else {
-                    clearErrors("stories");
+                    clearErrors("stories")
                   }
 
-                  field.onChange(value);
+                  field.onChange(value)
                 }}
               />
               {error ? (
@@ -150,7 +150,7 @@ const Specification = ({ furnishing, houseType, backyard, swimmingPool }) => {
               <InputField
                 {...field}
                 onChange={(event) => {
-                  field.onChange(stringToNumber(event.target.value));
+                  field.onChange(stringToNumber(event.target.value))
                 }}
                 type="number"
                 id="bedroom"
@@ -193,7 +193,7 @@ const Specification = ({ furnishing, houseType, backyard, swimmingPool }) => {
                 isTouched={isTouched}
                 isError={error}
                 onChange={(event) => {
-                  field.onChange(stringToNumber(event.target.value));
+                  field.onChange(stringToNumber(event.target.value))
                 }}
               />
               <HomeManagementCustomPlaceholder>
@@ -228,7 +228,7 @@ const Specification = ({ furnishing, houseType, backyard, swimmingPool }) => {
                 isTouched={isTouched}
                 isError={error}
                 onChange={(event) => {
-                  field.onChange(stringToNumber(event.target.value));
+                  field.onChange(stringToNumber(event.target.value))
                 }}
               />
               <HomeManagementCustomPlaceholder>
@@ -263,7 +263,7 @@ const Specification = ({ furnishing, houseType, backyard, swimmingPool }) => {
                 isTouched={isTouched}
                 isError={error}
                 onChange={(event) => {
-                  field.onChange(stringToNumber(event.target.value));
+                  field.onChange(stringToNumber(event.target.value))
                 }}
               />
               <HomeManagementCustomPlaceholder>
@@ -291,7 +291,7 @@ const Specification = ({ furnishing, houseType, backyard, swimmingPool }) => {
               isTouched={isTouched}
               defaultValue={field.value}
               onValueChange={(value) => {
-                field.onChange(JSON.parse(value || false));
+                field.onChange(JSON.parse(value || false))
               }}
             >
               <SelectItemDefault value="">
@@ -328,7 +328,7 @@ const Specification = ({ furnishing, houseType, backyard, swimmingPool }) => {
               isTouched={isTouched}
               defaultValue={field.value}
               onValueChange={(value) => {
-                field.onChange(JSON.parse(value || false));
+                field.onChange(JSON.parse(value || false))
               }}
             >
               <SelectItemDefault value="">
@@ -370,7 +370,6 @@ const Specification = ({ furnishing, houseType, backyard, swimmingPool }) => {
               <SelectItemDefault value="">
                 Choose a house type ...
               </SelectItemDefault>
-              {console.log(field)}
               {houseType.map((item) => (
                 <SelectItem
                   key={`select-house-${item}`}
@@ -445,20 +444,20 @@ const Specification = ({ furnishing, houseType, backyard, swimmingPool }) => {
                 isTouched={isTouched}
                 isError={error}
                 onChange={(event) => {
-                  const { value } = event.target;
-                  const isCustomInvalid = /[^a-zA-Z0-9., ]+/g.test(value);
+                  const { value } = event.target
+                  const isCustomInvalid = /[^a-zA-Z0-9., ]+/g.test(value)
 
                   if (isCustomInvalid) {
                     setError("remarks_1", {
                       type: "custom",
                       message:
                         "First remark must not contain special characters",
-                    });
+                    })
                   } else {
-                    clearErrors("remarks_1");
+                    clearErrors("remarks_1")
                   }
 
-                  field.onChange(value);
+                  field.onChange(value)
                 }}
               />
               {error ? (
@@ -496,19 +495,19 @@ const Specification = ({ furnishing, houseType, backyard, swimmingPool }) => {
                 isTouched={isTouched}
                 isError={error}
                 onChange={(event) => {
-                  const { value } = event.target;
-                  const isCustomInvalid = /[^a-zA-Z0-9., ]+/g.test(value);
+                  const { value } = event.target
+                  const isCustomInvalid = /[^a-zA-Z0-9., ]+/g.test(value)
 
                   if (isCustomInvalid) {
                     setError("remarks_2", {
                       type: "custom",
                       message: "remarks_2 must not contain special characters",
-                    });
+                    })
                   } else {
-                    clearErrors("remarks_2");
+                    clearErrors("remarks_2")
                   }
 
-                  field.onChange(value);
+                  field.onChange(value)
                 }}
               />
               {error ? (
@@ -546,19 +545,19 @@ const Specification = ({ furnishing, houseType, backyard, swimmingPool }) => {
                 isTouched={isTouched}
                 isError={error}
                 onChange={(event) => {
-                  const { value } = event.target;
-                  const isCustomInvalid = /[^a-zA-Z0-9., ]+/g.test(value);
+                  const { value } = event.target
+                  const isCustomInvalid = /[^a-zA-Z0-9., ]+/g.test(value)
 
                   if (isCustomInvalid) {
                     setError("remarks_3", {
                       type: "custom",
                       message: "remarks_3 must not contain special characters",
-                    });
+                    })
                   } else {
-                    clearErrors("remarks_3");
+                    clearErrors("remarks_3")
                   }
 
-                  field.onChange(value);
+                  field.onChange(value)
                 }}
               />
               {error ? (
@@ -573,8 +572,8 @@ const Specification = ({ furnishing, houseType, backyard, swimmingPool }) => {
         />
       </GroupInput>
     </>
-  );
-};
+  )
+}
 
 export async function getServerSideProps() {
   return {
@@ -602,9 +601,9 @@ export async function getServerSideProps() {
       furnishing: ["Fully Furnished", "Semi Furnished", "Unfurnished"],
       houseType: ["Compound", "Standalone", "Commercial"],
     },
-  };
+  }
 }
 
-Specification.getLayout = getEditHomeLayout;
+Specification.getLayout = getEditHomeLayout
 
-export default Specification;
+export default Specification
