@@ -168,7 +168,6 @@ const PropertyPartialan = ({ columns }) => {
     // Validation rules
     const requiredColumns = [
       "name",
-      "address",
       "available",
       "furnishing",
       "rental_price",
@@ -254,7 +253,6 @@ const PropertyPartialan = ({ columns }) => {
       // Validation rules
       const requiredColumns = [
         "name",
-        "address",
         "available",
         "furnishing",
         "rental_price",
@@ -353,7 +351,6 @@ const PropertyPartialan = ({ columns }) => {
       // Validation rules
       const requiredColumns = [
         "name",
-        "address",
         "available",
         "furnishing",
         "rental_price",
