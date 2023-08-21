@@ -304,7 +304,7 @@ export const ViewHomeLayout = ({ children }) => {
                       : `${convertNumberToPriceFormat(
                           homeAttributes.rental_price,
                           homeAttributes.price_currency
-                        )} /mo`}
+                        )} /month`}
                   </h2>
                   <p className="font-medium md:w-10/12 md:text-sm lg:text-base">
                     {homeAttributes.address || "-"}
@@ -337,7 +337,7 @@ export const ViewHomeLayout = ({ children }) => {
                         Rental Price
                       </h4>
                       <p className="font-medium">
-                        {homeAttributes.convertedPrices.rentalPrice} /mo
+                        {homeAttributes.convertedPrices.rentalPrice} /month
                       </p>
                     </div>
                     <div className="flex flex-col gap-1">
@@ -353,7 +353,7 @@ export const ViewHomeLayout = ({ children }) => {
                         Compound Fee
                       </h4>
                       <p className="font-medium">
-                        {homeAttributes.convertedPrices.compoundFee} /mo
+                        {homeAttributes.convertedPrices.compoundFee} /month
                       </p>
                     </div>
                     <div className="flex flex-col gap-1">

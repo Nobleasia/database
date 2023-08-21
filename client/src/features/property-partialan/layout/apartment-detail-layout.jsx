@@ -25,7 +25,7 @@ export const ApartmentDetail = ({
                 : `${convertNumberToPriceFormat(
                     publicAttributes.rental_price,
                     publicAttributes.price_currency
-                  )} /mo`}
+                  )} /month`}
             </h2>
             <p className="font-medium md:w-10/12 md:text-sm lg:text-base">
               {publicAttributes.address}
@@ -80,7 +80,7 @@ export const ApartmentDetail = ({
                       publicAttributes.rental_price,
                       publicAttributes.price_currency
                     )}{" "}
-                    /mo
+                    /month
                   </p>
                 </div>
               )}

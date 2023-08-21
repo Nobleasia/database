@@ -213,7 +213,7 @@ const createNewLand = async (req) => {
 
       land.available = land.available === "true" || land.available === "false" ? land.available === "true" : null;
       land.zone = land.zone && (land.zone === "Red" || land.zone === "Yellow" || land.zone === "Green") ? land.zone : null;
-      land.ownership = land.ownership === "Leasehold" || land.ownership === "Freehold" ? land.ownership : null;
+      land.ownership = land.ownership ? land.ownership : null;
       land.remarks_1 = land.remarks_1 ? land.remarks_1 : "No Remark";
       land.remarks_2 = land.remarks_2 ? land.remarks_2 : "No Remark";
       land.remarks_3 = land.remarks_3 ? land.remarks_3 : "No Remark";

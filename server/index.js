@@ -114,8 +114,7 @@ const { connectToDatabase } = require("./utils/db");
 const corsOptions = {
   origin: [
     "https://database.nobleasia.id",
-    "http://202.157.185.91:3000",
-	"http://localhost:3000",
+    "http://202.157.185.91:3000"
   ],
   credentials: true,
 };

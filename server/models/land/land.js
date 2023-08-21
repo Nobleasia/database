@@ -35,7 +35,7 @@ Land.init({
     allowNull: true,
   },
   ownership: {
-    type: DataTypes.ENUM('Leasehold', 'Freehold'),
+    type: DataTypes.STRING(255),
     allowNull: true,
   },
   available: {

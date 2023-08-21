@@ -521,7 +521,9 @@ const updateOrCreateLandById = async (req) => {
           });
         }
 
-        if (newLand.ownership) {
+        if (newLand.ownership === "") {
+          land.ownership = null;
+        } else {
           const { ownership } = newLand;
           if (!(ownership === "Leasehold" || ownership === "Freehold")) {
             const err = new ErrorDetails("LandError", "ownership", "invalid value");

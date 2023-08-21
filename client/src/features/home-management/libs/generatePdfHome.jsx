@@ -1008,7 +1008,7 @@ export const generatePDF = async (response, instance) => {
                     : `${convertNumberToPriceFormat(
                         property.rental_price,
                         property.price_currency
-                      )} /mo`}
+                      )} /month`}
                 </Text>
                 {property.name && (
                   <Text
@@ -1751,7 +1751,7 @@ export const generatePDF = async (response, instance) => {
                             property.rental_price,
                             property.price_currency
                           )}{" "}
-                          /mo
+                          /month
                         </Text>
                       </View>
                     )}
