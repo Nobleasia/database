@@ -120,7 +120,7 @@ const corsOptions = {
   origin: [
     "https://database.nobleasia.id",
     "http://202.157.185.91:3000",
-    "http://127.0.0.1:3000",
+    "http://localhost:3000",
   ],
   credentials: true,
 };
