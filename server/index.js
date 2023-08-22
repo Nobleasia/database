@@ -1,12 +1,17 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const cors = require('cors');
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const path = require('path');
+const path = require("path");
 
-const { accessTokenValidator, errorHandler, getUsername, adminValidator } = require("./middleware");
+const {
+  accessTokenValidator,
+  errorHandler,
+  getUsername,
+  adminValidator,
+} = require("./middleware");
 
-const deleteExpiredData = require('./utils/delete_expired_data');
+const deleteExpiredData = require("./utils/delete_expired_data");
 
 const {
   registerRouter,
@@ -23,7 +28,7 @@ const {
   createNewPropertyAreaRouter,
   readPropertyAreaRouter,
   updatePropertyAreaRouter,
-  deletePropertyAreaRouter
+  deletePropertyAreaRouter,
 } = require("./controllers/property/areas");
 
 const {
@@ -38,7 +43,7 @@ const {
   readPropertyPersonInChargeCompanyRouter,
   updatePropertyPersonInChargeCompanyRouter,
   deletePropertyPersonInChargeCompanyRouter,
-  restorePropertyPersonInChargeCompanyRouter
+  restorePropertyPersonInChargeCompanyRouter,
 } = require("./controllers/property/person_in_charge_company");
 
 const {
@@ -46,7 +51,7 @@ const {
   readPropertyPersonInChargeRoleRouter,
   updatePropertyPersonInChargeRoleRouter,
   deletePropertyPersonInChargeRoleRouter,
-  restorePropertyPersonInChargeRoleRouter
+  restorePropertyPersonInChargeRoleRouter,
 } = require("./controllers/property/person_in_charge_roles");
 
 const {
@@ -55,7 +60,7 @@ const {
   updatePropertyPersonInChargeRouter,
   deletePropertyPersonInChargeRouter,
   restorePropertyPersonInChargeRouter,
-} = require("./controllers/property/person_in_charges")
+} = require("./controllers/property/person_in_charges");
 
 const {
   createNewPropertyPaymentTermRouter,
@@ -71,7 +76,7 @@ const {
   updateApartmentRouter,
   deleteApartmentRouter,
   restoreApartmentRouter,
-} = require("./controllers/apartment/apartments")
+} = require("./controllers/apartment/apartments");
 
 const {
   createNewOfficeRouter,
@@ -79,7 +84,7 @@ const {
   updateOfficeRouter,
   readOfficeRouter,
   readOfficeKodeProparRouter,
-} = require('./controllers/offices');
+} = require("./controllers/offices");
 
 const {
   createNewHomeRouter,
@@ -114,7 +119,8 @@ const { connectToDatabase } = require("./utils/db");
 const corsOptions = {
   origin: [
     "https://database.nobleasia.id",
-    "http://202.157.185.91:3000"
+    "http://202.157.185.91:3000",
+    "http://127.0.0.1:3000",
   ],
   credentials: true,
 };
@@ -127,96 +133,141 @@ app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("NA Database API is running 🥳");
-})
+});
 
-app.use('/static', express.static(path.join(__dirname, 'assets')));
+app.use("/static", express.static(path.join(__dirname, "assets")));
 
-app.use('/users/login', loginRouter);
+app.use("/users/login", loginRouter);
 
-app.use('/users/refresh_token', refreshTokenRouter);
-app.use('/users/access_token', accessTokenValidatorRouter);
+app.use("/users/refresh_token", refreshTokenRouter);
+app.use("/users/access_token", accessTokenValidatorRouter);
 
-app.use('/analytics/properties', propertyAnalyticsRouter);
+app.use("/analytics/properties", propertyAnalyticsRouter);
 
-app.use('/property_partialan/public_link/read', readPropertyPartialanRouter);
+app.use("/property_partialan/public_link/read", readPropertyPartialanRouter);
 
 //API that needs access token validation
 app.use(accessTokenValidator);
 
-app.use('/users/logout', logoutRouter);
+app.use("/users/logout", logoutRouter);
 
 app.use(getUsername);
 
-app.use('/property/areas/create', createNewPropertyAreaRouter);
-app.use('/property/areas/read', readPropertyAreaRouter);
-app.use('/property/areas/update', updatePropertyAreaRouter);
-app.use('/property/areas/delete', deletePropertyAreaRouter);
+app.use("/property/areas/create", createNewPropertyAreaRouter);
+app.use("/property/areas/read", readPropertyAreaRouter);
+app.use("/property/areas/update", updatePropertyAreaRouter);
+app.use("/property/areas/delete", deletePropertyAreaRouter);
 
-app.use('/property/facility_names/create', createNewPropertyFacilityNameRouter);
-app.use('/property/facility_names/read', readPropertyFacilityNameRouter);
-app.use('/property/facility_names/update', updatePropertyFacilityNameRouter);
-app.use('/property/facility_names/delete', deletePropertyFacilityNameRouter);
+app.use("/property/facility_names/create", createNewPropertyFacilityNameRouter);
+app.use("/property/facility_names/read", readPropertyFacilityNameRouter);
+app.use("/property/facility_names/update", updatePropertyFacilityNameRouter);
+app.use("/property/facility_names/delete", deletePropertyFacilityNameRouter);
 
-app.use('/property/person_in_charge_companies/create', createNewPropertyPersonInChargeCompanyRouter);
-app.use('/property/person_in_charge_companies/read', readPropertyPersonInChargeCompanyRouter);
-app.use('/property/person_in_charge_companies/update', updatePropertyPersonInChargeCompanyRouter);
-app.use('/property/person_in_charge_companies/delete', deletePropertyPersonInChargeCompanyRouter);
-app.use('/property/person_in_charge_companies/restore', restorePropertyPersonInChargeCompanyRouter);
+app.use(
+  "/property/person_in_charge_companies/create",
+  createNewPropertyPersonInChargeCompanyRouter,
+);
+app.use(
+  "/property/person_in_charge_companies/read",
+  readPropertyPersonInChargeCompanyRouter,
+);
+app.use(
+  "/property/person_in_charge_companies/update",
+  updatePropertyPersonInChargeCompanyRouter,
+);
+app.use(
+  "/property/person_in_charge_companies/delete",
+  deletePropertyPersonInChargeCompanyRouter,
+);
+app.use(
+  "/property/person_in_charge_companies/restore",
+  restorePropertyPersonInChargeCompanyRouter,
+);
 
-app.use('/property/person_in_charge_roles/create', createNewPropertyPersonInChargeRoleRouter);
-app.use('/property/person_in_charge_roles/read', readPropertyPersonInChargeRoleRouter);
-app.use('/property/person_in_charge_roles/update', updatePropertyPersonInChargeRoleRouter);
-app.use('/property/person_in_charge_roles/delete', deletePropertyPersonInChargeRoleRouter);
-app.use('/property/person_in_charge_roles/restore', restorePropertyPersonInChargeRoleRouter);
+app.use(
+  "/property/person_in_charge_roles/create",
+  createNewPropertyPersonInChargeRoleRouter,
+);
+app.use(
+  "/property/person_in_charge_roles/read",
+  readPropertyPersonInChargeRoleRouter,
+);
+app.use(
+  "/property/person_in_charge_roles/update",
+  updatePropertyPersonInChargeRoleRouter,
+);
+app.use(
+  "/property/person_in_charge_roles/delete",
+  deletePropertyPersonInChargeRoleRouter,
+);
+app.use(
+  "/property/person_in_charge_roles/restore",
+  restorePropertyPersonInChargeRoleRouter,
+);
 
-app.use('/property/person_in_charges/create', createNewPropertyPersonInChargeRouter);
-app.use('/property/person_in_charges/read', readPropertyPersonInChargeRouter);
-app.use('/property/person_in_charges/update', updatePropertyPersonInChargeRouter);
-app.use('/property/person_in_charges/delete', deletePropertyPersonInChargeRouter);
-app.use('/property/person_in_charges/restore', restorePropertyPersonInChargeRouter);
+app.use(
+  "/property/person_in_charges/create",
+  createNewPropertyPersonInChargeRouter,
+);
+app.use("/property/person_in_charges/read", readPropertyPersonInChargeRouter);
+app.use(
+  "/property/person_in_charges/update",
+  updatePropertyPersonInChargeRouter,
+);
+app.use(
+  "/property/person_in_charges/delete",
+  deletePropertyPersonInChargeRouter,
+);
+app.use(
+  "/property/person_in_charges/restore",
+  restorePropertyPersonInChargeRouter,
+);
 
-app.use('/property/payment_terms/create', createNewPropertyPaymentTermRouter);
-app.use('/property/payment_terms/read', readPropertyPaymentTermRouter);
-app.use('/property/payment_terms/update', updatePropertyPaymentTermRouter);
-app.use('/property/payment_terms/delete', deletePropertyPaymentTermRouter);
+app.use("/property/payment_terms/create", createNewPropertyPaymentTermRouter);
+app.use("/property/payment_terms/read", readPropertyPaymentTermRouter);
+app.use("/property/payment_terms/update", updatePropertyPaymentTermRouter);
+app.use("/property/payment_terms/delete", deletePropertyPaymentTermRouter);
 
-app.use('/apartment/create', createNewApartmentRouter);
-app.use('/apartment/read', readApartmentRouter);
-app.use('/apartment/read/kode_propar', readApartmentKodeProparRouter);
-app.use('/apartment/update', updateApartmentRouter);
-app.use('/apartment/delete', deleteApartmentRouter);
-app.use('/apartment/restore', restoreApartmentRouter);
+app.use("/apartment/create", createNewApartmentRouter);
+app.use("/apartment/read", readApartmentRouter);
+app.use("/apartment/read/kode_propar", readApartmentKodeProparRouter);
+app.use("/apartment/update", updateApartmentRouter);
+app.use("/apartment/delete", deleteApartmentRouter);
+app.use("/apartment/restore", restoreApartmentRouter);
 
-app.use('/office/create', createNewOfficeRouter);
-app.use('/office/update', updateOfficeRouter);
-app.use('/office/delete', deleteOfficeRouter);
-app.use('/office/read', readOfficeRouter);
-app.use('/office/read/kode_propar', readOfficeKodeProparRouter);
+app.use("/office/create", createNewOfficeRouter);
+app.use("/office/update", updateOfficeRouter);
+app.use("/office/delete", deleteOfficeRouter);
+app.use("/office/read", readOfficeRouter);
+app.use("/office/read/kode_propar", readOfficeKodeProparRouter);
 
-app.use('/home/create', createNewHomeRouter);
-app.use('/home/read', readHomeRouter);
-app.use('/home/read/kode_propar', readHomeKodeProparRouter);
-app.use('/home/update', updateHomeRouter);
-app.use('/home/delete', deleteHomeRouter);
+app.use("/home/create", createNewHomeRouter);
+app.use("/home/read", readHomeRouter);
+app.use("/home/read/kode_propar", readHomeKodeProparRouter);
+app.use("/home/update", updateHomeRouter);
+app.use("/home/delete", deleteHomeRouter);
 
-app.use('/land/create', createNewLandRouter);
-app.use('/land/read', readLandRouter);
-app.use('/land/read/kode_propar', readLandKodeProparRouter);
-app.use('/land/update', updateLandRouter);
-app.use('/land/delete', deleteLandRouter);
+app.use("/land/create", createNewLandRouter);
+app.use("/land/read", readLandRouter);
+app.use("/land/read/kode_propar", readLandKodeProparRouter);
+app.use("/land/update", updateLandRouter);
+app.use("/land/delete", deleteLandRouter);
 
-app.use('/property_partialan/public_link/create', createNewPropertyPartialanRouter);
+app.use(
+  "/property_partialan/public_link/create",
+  createNewPropertyPartialanRouter,
+);
 
-app.use('/property_partialan/excel_pdf/create', createExcelPdfDataRouter);
+app.use("/property_partialan/excel_pdf/create", createExcelPdfDataRouter);
 
 app.use(adminValidator);
 
-app.use('/users/register', registerRouter);
-app.use('/users/read', readUserRouter);
-app.use('/users/update', updateUserRouter);
-app.use('/users/delete', deleteUserRouter);
+app.use("/users/register", registerRouter);
+app.use("/users/read", readUserRouter);
+app.use("/users/update", updateUserRouter);
+app.use("/users/delete", deleteUserRouter);
 
-app.use('/logs/read', logsRouter);
+app.use("/logs/read", logsRouter);
 
 deleteExpiredData();
 
@@ -224,8 +275,8 @@ const main = async () => {
   await connectToDatabase();
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
-  })
-}
+  });
+};
 
 app.use(errorHandler);
 
