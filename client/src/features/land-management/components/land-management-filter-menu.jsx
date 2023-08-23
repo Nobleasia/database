@@ -1,8 +1,8 @@
-import cn from "classnames";
-import { useMemo } from "react";
-import { MdClose, MdFilterList } from "react-icons/md";
+import cn from "classnames"
+import { useMemo } from "react"
+import { MdClose, MdFilterList } from "react-icons/md"
 
-import { usePrivateFetcher } from "@/hooks";
+import { usePrivateFetcher } from "@/hooks"
 
 import {
   Button,
@@ -14,37 +14,24 @@ import {
   DialogRoot,
   DialogTitle,
   DialogTrigger,
-} from "@/components";
+} from "@/components"
 
-import { LandManagementFilterCheckboxField } from "./land-management-filter-checkbox-field";
-import { LandManagementFilterMinMaxInputFields } from "./land-management-filter-min-max-input-fields";
-import { LandManagementFilterSelectMultiple } from "./land-management-filter-select-multiple";
-
-const ownershipItems = [
-  {
-    id: "leasehold",
-    value: "Leasehold",
-    name: "Leasehold",
-  },
-  {
-    id: "freehold",
-    value: "Freehold",
-    name: "Freehold",
-  },
-];
+import { LandManagementFilterCheckboxField } from "./land-management-filter-checkbox-field"
+import { LandManagementFilterMinMaxInputFields } from "./land-management-filter-min-max-input-fields"
+import { LandManagementFilterSelectMultiple } from "./land-management-filter-select-multiple"
 
 const availabilityItems = [
   {
     id: "yes",
     value: "Yes",
-    name: "yes",
+    name: "Yes",
   },
   {
     id: "no",
     value: "No",
-    name: "yes",
+    name: "No",
   },
-];
+]
 
 const zoneItems = [
   {
@@ -67,7 +54,7 @@ const zoneItems = [
     value: "Others",
     name: "Others",
   },
-];
+]
 
 const leaseTermsTypes = [
   {
@@ -80,7 +67,7 @@ const leaseTermsTypes = [
     label: "Year",
     value: "Year",
   },
-];
+]
 
 export const LandManagementFilterMenu = ({
   control,
@@ -92,31 +79,31 @@ export const LandManagementFilterMenu = ({
     revalidateOnMount: true,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
-  };
+  }
   const {
     data: landPropertyAreaData,
     isLoading: landPropertyAreaDataIsLoading,
   } = usePrivateFetcher(
     [process.env.NEXT_PUBLIC_ENDPOINT_PROPERTY_AREA_READ, {}],
     fetcherConfig
-  );
+  )
 
   const areaOptions = useMemo(() => {
-    if (!landPropertyAreaData?.data?.attributes) return [];
+    if (!landPropertyAreaData?.data?.attributes) return []
 
     return landPropertyAreaData?.data?.attributes.map((area) => ({
       value: area.region_name,
       label: area.region_name,
-    }));
-  }, [landPropertyAreaData?.data?.attributes]);
+    }))
+  }, [landPropertyAreaData?.data?.attributes])
 
   const onCheckboxCheckedChange = (value, itemValue, field) => {
     if (value) {
-      field.onChange([...field.value, itemValue]);
+      field.onChange([...field.value, itemValue])
     } else {
-      field.onChange(field.value.filter((item) => item !== itemValue));
+      field.onChange(field.value.filter((item) => item !== itemValue))
     }
-  };
+  }
 
   const onResetFilterValues = () => {
     reset(
@@ -125,7 +112,6 @@ export const LandManagementFilterMenu = ({
         filter: {
           property_areas: [],
           zone: [],
-          ownership: [],
           availabilities: [],
           lease_terms_types: [],
           lease_terms: {
@@ -145,8 +131,8 @@ export const LandManagementFilterMenu = ({
       {
         keepDefaultValues: true,
       }
-    );
-  };
+    )
+  }
 
   return (
     <DialogRoot>
@@ -194,7 +180,7 @@ export const LandManagementFilterMenu = ({
                 disabled={landPropertyAreaDataIsLoading}
                 options={areaOptions}
                 onChangeValue={(field, value) => {
-                  field.onChange(value.map((area) => area.value));
+                  field.onChange(value.map((area) => area.value))
                 }}
               />
             </div>
@@ -215,23 +201,6 @@ export const LandManagementFilterMenu = ({
                 </div>
 
                 <div className="flex flex-col gap-8 sm:flex-row md:flex-row">
-                  <div className="flex h-full w-max flex-col gap-3">
-                    <h2 className="font-semibold">Ownership</h2>
-                    <div className="grid grid-cols-1 grid-rows-3 gap-5 xl:grid-rows-2">
-                      {ownershipItems.map((ownershipItem) => (
-                        <LandManagementFilterCheckboxField
-                          key={`filter-field-ownership-${ownershipItem.id}`}
-                          id={`filter.ownership.${ownershipItem.id}`}
-                          name="filter.ownership"
-                          itemValue={ownershipItem.value}
-                          label={ownershipItem.label}
-                          control={control}
-                          onValueChange={onCheckboxCheckedChange}
-                        />
-                      ))}
-                    </div>
-                  </div>
-
                   <div className="flex h-full w-max flex-col gap-3">
                     <h2 className="font-semibold">Availability</h2>
                     <div className="grid grid-rows-2 gap-5">
@@ -341,5 +310,5 @@ export const LandManagementFilterMenu = ({
         </DialogContent>
       </DialogPortal>
     </DialogRoot>
-  );
-};
+  )
+}

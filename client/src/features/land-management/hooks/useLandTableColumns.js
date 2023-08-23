@@ -58,13 +58,6 @@ export const useLandTableColumns = ({
         filterFn: "inNumberRange",
       },
       {
-        id: "ownership",
-        accessorKey: "ownership",
-        header: () => "Ownership",
-        enableColumnFilter: true,
-        filterFn: filterArrIncludesSome,
-      },
-      {
         id: "availability",
         accessorKey: "available",
         cell: (info) => {
@@ -76,16 +69,7 @@ export const useLandTableColumns = ({
         },
         header: () => "Availability",
         enableColumnFilter: true,
-        filterFn: (row, columnId, filterValue) => {
-          const isAvailable = row.getValue(columnId)
-          const availableStatus = isAvailable ? "Yes" : "No"
-
-          if (filterValue.length === 0) {
-            return true
-          }
-
-          return filterValue.includes(availableStatus)
-        },
+        filterFn: filterArrIncludesSome,
       },
       {
         id: "zone",

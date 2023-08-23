@@ -85,6 +85,8 @@ const ApartementManagement = ({ showColumnFieldItems }) => {
 
   const [columnFilters, setColumnFilters] = useState([])
 
+  console.log(columnFilters)
+
   const [
     // eslint-disable-next-line no-unused-vars
     queryWatch,
@@ -141,10 +143,7 @@ const ApartementManagement = ({ showColumnFieldItems }) => {
 
   const handleApplyingFilter = (filtersValues) => {
     const {
-      availabilities,
-      furnishing,
       property_areas: propertyAreas,
-      price_currencies: priceCurrencies,
       lease_terms_types: leaseTermsTypes,
       lease_terms: leaseTerms,
       rental_price: rentalPrice,
@@ -160,10 +159,10 @@ const ApartementManagement = ({ showColumnFieldItems }) => {
     }
 
     const columnFilters = [
-      { id: "availability", value: availabilities },
-      { id: "furnishing", value: furnishing },
+      { id: "availability", value: filtersValues.availabilities },
+      { id: "furnishing", value: filtersValues.furnishing },
       { id: "paymentTerms", value: filtersValues.payment_terms },
-      { id: "priceCurrency", value: priceCurrencies },
+      { id: "priceCurrency", value: filtersValues.price_currencies },
       {
         id: "leaseTerms",
         value: {

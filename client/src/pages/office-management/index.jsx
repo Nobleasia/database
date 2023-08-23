@@ -129,8 +129,6 @@ const OfficeManagement = ({ showColumnFieldItems }) => {
 
   const handleApplyingFilter = (filtersValues) => {
     const {
-      availabilities,
-      condition,
       property_areas: propertyAreas,
       price_currencies: priceCurrencies,
       lease_terms_types: leaseTermsTypes,
@@ -145,8 +143,8 @@ const OfficeManagement = ({ showColumnFieldItems }) => {
     }
 
     const columnFilters = [
-      { id: "availability", value: availabilities },
-      { id: "condition", value: condition },
+      { id: "availability", value: filtersValues.availabilities },
+      { id: "condition", value: filtersValues.condition },
       { id: "paymentTerms", value: filtersValues.payment_terms },
       { id: "priceCurrency", value: priceCurrencies },
       {

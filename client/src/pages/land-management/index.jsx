@@ -43,7 +43,6 @@ const LandManagement = ({ showColumnFieldItems }) => {
       query: "",
       filter: {
         property_areas: [],
-        ownership: [],
         zone: [],
         availabilities: [],
         lease_terms_types: [],
@@ -124,8 +123,6 @@ const LandManagement = ({ showColumnFieldItems }) => {
 
   const handleApplyingFilter = (filtersValues) => {
     const {
-      availabilities,
-      ownership,
       zone,
       property_areas: propertyAreas,
       lease_terms_types: leaseTermsTypes,
@@ -139,8 +136,7 @@ const LandManagement = ({ showColumnFieldItems }) => {
     }
 
     const columnFilters = [
-      { id: "availability", value: availabilities },
-      { id: "ownership", value: ownership },
+      { id: "availability", value: filtersValues.availabilities },
       { id: "zone", value: zone },
       {
         id: "leaseTerms",

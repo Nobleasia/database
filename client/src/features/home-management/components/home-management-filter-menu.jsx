@@ -1,8 +1,8 @@
-import cn from "classnames";
-import { useMemo } from "react";
-import { MdClose, MdFilterList } from "react-icons/md";
+import cn from "classnames"
+import { useMemo } from "react"
+import { MdClose, MdFilterList } from "react-icons/md"
 
-import { usePrivateFetcher } from "@/hooks";
+import { usePrivateFetcher } from "@/hooks"
 
 import {
   Button,
@@ -14,86 +14,86 @@ import {
   DialogRoot,
   DialogTitle,
   DialogTrigger,
-} from "@/components";
+} from "@/components"
 
-import { HomeManagementFilterCheckboxField } from "./home-management-filter-checkbox-field";
-import { HomeManagementFilterMinMaxInputFields } from "./home-management-filter-min-max-input-fields";
-import { HomeManagementFilterSelectMultiple } from "./home-management-filter-select-multiple";
+import { HomeManagementFilterCheckboxField } from "./home-management-filter-checkbox-field"
+import { HomeManagementFilterMinMaxInputFields } from "./home-management-filter-min-max-input-fields"
+import { HomeManagementFilterSelectMultiple } from "./home-management-filter-select-multiple"
 
 const furnishingItems = [
   {
-    id: "fully-furnished",
-    value: "Fully Furnished",
-    name: "fully-furnished",
+    id: "unfurnished",
+    label: "Unfurnished",
+    value: "Unfurnished",
   },
   {
     id: "semi-furnished",
+    name: "Semi Furnished",
     value: "Semi Furnished",
-    name: "semi-furnished",
   },
   {
-    id: "unfurnished",
-    value: "Unfurnished",
-    name: "unfurnished",
+    id: "fully-furnished",
+    label: "Fully Furnished",
+    value: "Fully Furnished",
   },
-];
+]
 
 const houseTypeItems = [
   {
     id: "compound",
     value: "Compound",
-    name: "compound",
+    name: "Compound",
   },
   {
     id: "standalone",
     value: "Standalone",
-    name: "standalone",
+    name: "Standalone",
   },
   {
     id: "commercial",
     value: "Commercial",
-    name: "commercial",
+    name: "Commercial",
   },
-];
+]
 
 const availabilityItems = [
   {
     id: "yes",
+    label: "Yes",
     value: "Yes",
-    name: "yes",
   },
   {
     id: "no",
+    label: "No",
     value: "No",
-    name: "yes",
   },
-];
+]
 
 const backyardItems = [
   {
     id: "yes",
+    label: "Yes",
     value: "Yes",
-    name: "yes",
   },
   {
     id: "no",
+    label: "No",
     value: "No",
-    name: "yes",
   },
-];
+]
 
 const swimmingPoolItems = [
   {
     id: "yes",
+    label: "Yes",
     value: "Yes",
-    name: "yes",
   },
   {
     id: "no",
+    label: "No",
     value: "No",
-    name: "yes",
   },
-];
+]
 
 const roomsItems = [
   {
@@ -116,7 +116,7 @@ const roomsItems = [
     title: "Carport/Garage",
     name: "carport_or_garage",
   },
-];
+]
 
 const priceCurrencies = [
   {
@@ -129,7 +129,7 @@ const priceCurrencies = [
     label: "Dollar",
     value: "Dollar",
   },
-];
+]
 
 const propertyPrices = [
   {
@@ -142,7 +142,7 @@ const propertyPrices = [
     title: "Selling Price",
     name: "selling_price",
   },
-];
+]
 
 const leaseTermsTypes = [
   {
@@ -155,7 +155,7 @@ const leaseTermsTypes = [
     label: "Year",
     value: "Year",
   },
-];
+]
 
 export const HomeManagementFilterMenu = ({
   control,
@@ -167,31 +167,31 @@ export const HomeManagementFilterMenu = ({
     revalidateOnMount: true,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
-  };
+  }
   const {
     data: homePropertyAreaData,
     isLoading: homePropertyAreaDataIsLoading,
   } = usePrivateFetcher(
     [process.env.NEXT_PUBLIC_ENDPOINT_PROPERTY_AREA_READ, {}],
     fetcherConfig
-  );
+  )
 
   const areaOptions = useMemo(() => {
-    if (!homePropertyAreaData?.data?.attributes) return [];
+    if (!homePropertyAreaData?.data?.attributes) return []
 
     return homePropertyAreaData?.data?.attributes.map((area) => ({
       value: area.region_name,
       label: area.region_name,
-    }));
-  }, [homePropertyAreaData?.data?.attributes]);
+    }))
+  }, [homePropertyAreaData?.data?.attributes])
 
   const onCheckboxCheckedChange = (value, itemValue, field) => {
     if (value) {
-      field.onChange([...field.value, itemValue]);
+      field.onChange([...field.value, itemValue])
     } else {
-      field.onChange(field.value.filter((item) => item !== itemValue));
+      field.onChange(field.value.filter((item) => item !== itemValue))
     }
-  };
+  }
 
   const onResetFilterValues = () => {
     reset(
@@ -251,8 +251,8 @@ export const HomeManagementFilterMenu = ({
       {
         keepDefaultValues: true,
       }
-    );
-  };
+    )
+  }
 
   return (
     <DialogRoot>
@@ -300,7 +300,7 @@ export const HomeManagementFilterMenu = ({
                 disabled={homePropertyAreaDataIsLoading}
                 options={areaOptions}
                 onChangeValue={(field, value) => {
-                  field.onChange(value.map((area) => area.value));
+                  field.onChange(value.map((area) => area.value))
                 }}
               />
             </div>
@@ -390,7 +390,7 @@ export const HomeManagementFilterMenu = ({
                         <HomeManagementFilterCheckboxField
                           key={`filter-field-swimming-pool-${swimmingPoolItem.id}`}
                           id={`filter.swimming-pool.${swimmingPoolItem.id}`}
-                          name="filter.swimming-pool"
+                          name="filter.swimming_pool"
                           itemValue={swimmingPoolItem.value}
                           label={swimmingPoolItem.label}
                           control={control}
@@ -407,7 +407,7 @@ export const HomeManagementFilterMenu = ({
                         <HomeManagementFilterCheckboxField
                           key={`filter-field-house-type-${houseTypeItem.id}`}
                           id={`filter.house-type.${houseTypeItem.id}`}
-                          name="filter.house-type"
+                          name="filter.house_type"
                           itemValue={houseTypeItem.value}
                           label={houseTypeItem.label}
                           control={control}
@@ -552,5 +552,5 @@ export const HomeManagementFilterMenu = ({
         </DialogContent>
       </DialogPortal>
     </DialogRoot>
-  );
-};
+  )
+}

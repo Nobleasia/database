@@ -104,16 +104,7 @@ export const useOfficeTableColumns = ({
         },
         header: () => "Availability",
         enableColumnFilter: true,
-        filterFn: (row, columnId, filterValue) => {
-          const isAvailable = row.getValue(columnId)
-          const availableStatus = isAvailable ? "Yes" : "No"
-
-          if (filterValue.length === 0) {
-            return true
-          }
-
-          return filterValue.includes(availableStatus)
-        },
+        filterFn: filterArrIncludesSome,
       },
       {
         id: "picName",

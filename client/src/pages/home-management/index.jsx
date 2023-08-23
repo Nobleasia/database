@@ -155,10 +155,7 @@ const HomeManagement = ({ showColumnFieldItems }) => {
 
   const handleApplyingFilter = (filtersValues) => {
     const {
-      availabilities,
-      furnishing,
       property_areas: propertyAreas,
-      price_currencies: priceCurrencies,
       lease_terms_types: leaseTermsTypes,
       lease_terms: leaseTerms,
       rental_price: rentalPrice,
@@ -169,9 +166,6 @@ const HomeManagement = ({ showColumnFieldItems }) => {
       bathroom,
       study_room: studyRoom,
       carport_or_garage: carportOrGarage,
-      swimming_pool: swimmingPool,
-      backyard,
-      house_type: houseType,
       stories,
     } = filtersValues
 
@@ -180,10 +174,10 @@ const HomeManagement = ({ showColumnFieldItems }) => {
     }
 
     const columnFilters = [
-      { id: "availability", value: availabilities },
-      { id: "furnishing", value: furnishing },
-      { id: "houseType", value: houseType },
-      { id: "priceCurrency", value: priceCurrencies },
+      { id: "availability", value: filtersValues.availabilities },
+      { id: "furnishing", value: filtersValues.furnishing },
+      { id: "houseType", value: filtersValues.house_type },
+      { id: "priceCurrency", value: filtersValues.price_currencies },
       {
         id: "leaseTerms",
         value: {
@@ -201,8 +195,8 @@ const HomeManagement = ({ showColumnFieldItems }) => {
       { id: "bathroom", value: formatFilterValue(bathroom) },
       { id: "studyRoom", value: formatFilterValue(studyRoom) },
       { id: "carportOrGarage", value: formatFilterValue(carportOrGarage) },
-      { id: "swimmingPool", value: swimmingPool },
-      { id: "backyard", value: backyard },
+      { id: "swimmingPool", value: filtersValues.swimming_pool },
+      { id: "backyard", value: filtersValues.backyard },
       { id: "area", value: propertyAreas },
     ]
 

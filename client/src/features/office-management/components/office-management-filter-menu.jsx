@@ -1,8 +1,8 @@
-import cn from "classnames";
-import { useMemo } from "react";
-import { MdClose, MdFilterList } from "react-icons/md";
+import cn from "classnames"
+import { useMemo } from "react"
+import { MdClose, MdFilterList } from "react-icons/md"
 
-import { usePrivateFetcher } from "@/hooks";
+import { usePrivateFetcher } from "@/hooks"
 
 import {
   Button,
@@ -14,11 +14,11 @@ import {
   DialogRoot,
   DialogTitle,
   DialogTrigger,
-} from "@/components";
+} from "@/components"
 
-import { OfficeManagementFilterCheckboxField } from "./office-management-filter-checkbox-field";
-import { OfficeManagementFilterMinMaxInputFields } from "./office-management-filter-min-max-input-fields";
-import { OfficeManagementFilterSelectMultiple } from "./office-management-filter-select-multiple";
+import { OfficeManagementFilterCheckboxField } from "./office-management-filter-checkbox-field"
+import { OfficeManagementFilterMinMaxInputFields } from "./office-management-filter-min-max-input-fields"
+import { OfficeManagementFilterSelectMultiple } from "./office-management-filter-select-multiple"
 
 const conditionItems = [
   {
@@ -27,29 +27,29 @@ const conditionItems = [
     name: "Fitted",
   },
   {
-    id: "semi-fitted",
-    value: "Semi-Fitted",
-    name: "Semi-Fitted",
+    id: "semi fitted",
+    value: "Semi Fitted",
+    name: "Semi Fitted",
   },
   {
     id: "bare",
     value: "Bare",
     name: "Bare",
   },
-];
+]
 
 const availabilityItems = [
   {
     id: "yes",
     value: "Yes",
-    name: "yes",
+    name: "Yes",
   },
   {
     id: "no",
     value: "No",
-    name: "yes",
+    name: "No",
   },
-];
+]
 
 const priceCurrencies = [
   {
@@ -62,7 +62,7 @@ const priceCurrencies = [
     label: "Dollar",
     value: "Dollar",
   },
-];
+]
 
 const propertyPrices = [
   {
@@ -75,7 +75,7 @@ const propertyPrices = [
     title: "Selling Price",
     name: "selling_price",
   },
-];
+]
 
 const leaseTermsTypes = [
   {
@@ -88,7 +88,7 @@ const leaseTermsTypes = [
     label: "Year",
     value: "Year",
   },
-];
+]
 
 export const OfficeManagementFilterMenu = ({
   control,
@@ -100,49 +100,49 @@ export const OfficeManagementFilterMenu = ({
     revalidateOnMount: true,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
-  };
+  }
   const {
     data: officePropertyAreaData,
     isLoading: officePropertyAreaDataIsLoading,
   } = usePrivateFetcher(
     [process.env.NEXT_PUBLIC_ENDPOINT_PROPERTY_AREA_READ, {}],
     fetcherConfig
-  );
+  )
   const {
     data: officePaymentTermData,
     isLoading: officePaymentTermDataIsLoading,
   } = usePrivateFetcher(
     [process.env.NEXT_PUBLIC_ENDPOINT_PAYMENT_TERMS_READ, {}],
     fetcherConfig
-  );
+  )
 
   const areaOptions = useMemo(() => {
-    if (!officePropertyAreaData?.data?.attributes) return [];
+    if (!officePropertyAreaData?.data?.attributes) return []
 
     return officePropertyAreaData?.data?.attributes.map((area) => ({
       value: area.region_name,
       label: area.region_name,
-    }));
-  }, [officePropertyAreaData?.data?.attributes]);
+    }))
+  }, [officePropertyAreaData?.data?.attributes])
 
   const officePaymentTermsOptions = useMemo(() => {
-    if (!officePaymentTermData?.data?.attributes) return [];
+    if (!officePaymentTermData?.data?.attributes) return []
 
     return officePaymentTermData?.data?.attributes.map(
       ({ payment_term: paymentTerm }) => ({
         value: paymentTerm,
         label: paymentTerm,
       })
-    );
-  }, [officePaymentTermData?.data?.attributes]);
+    )
+  }, [officePaymentTermData?.data?.attributes])
 
   const onCheckboxCheckedChange = (value, itemValue, field) => {
     if (value) {
-      field.onChange([...field.value, itemValue]);
+      field.onChange([...field.value, itemValue])
     } else {
-      field.onChange(field.value.filter((item) => item !== itemValue));
+      field.onChange(field.value.filter((item) => item !== itemValue))
     }
-  };
+  }
 
   const onResetFilterValues = () => {
     reset(
@@ -180,8 +180,8 @@ export const OfficeManagementFilterMenu = ({
       {
         keepDefaultValues: true,
       }
-    );
-  };
+    )
+  }
 
   return (
     <DialogRoot>
@@ -229,7 +229,7 @@ export const OfficeManagementFilterMenu = ({
                 disabled={officePropertyAreaDataIsLoading}
                 options={areaOptions}
                 onChangeValue={(field, value) => {
-                  field.onChange(value.map((area) => area.value));
+                  field.onChange(value.map((area) => area.value))
                 }}
               />
             </div>
@@ -349,7 +349,7 @@ export const OfficeManagementFilterMenu = ({
                   onChangeValue={(field, value) => {
                     field.onChange(
                       value.map((paymentTerm) => paymentTerm.value)
-                    );
+                    )
                   }}
                 />
               </div>
@@ -410,5 +410,5 @@ export const OfficeManagementFilterMenu = ({
         </DialogContent>
       </DialogPortal>
     </DialogRoot>
-  );
-};
+  )
+}

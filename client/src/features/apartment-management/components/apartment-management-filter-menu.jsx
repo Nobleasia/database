@@ -1,8 +1,8 @@
-import cn from "classnames";
-import { useMemo } from "react";
-import { MdClose, MdFilterList } from "react-icons/md";
+import cn from "classnames"
+import { useMemo } from "react"
+import { MdClose, MdFilterList } from "react-icons/md"
 
-import { usePrivateFetcher } from "@/hooks";
+import { usePrivateFetcher } from "@/hooks"
 
 import {
   Button,
@@ -14,42 +14,42 @@ import {
   DialogRoot,
   DialogTitle,
   DialogTrigger,
-} from "@/components";
+} from "@/components"
 
-import { ApartmentManagementFilterCheckboxField } from "./apartment-management-filter-checkbox-field";
-import { ApartmentManagementFilterMinMaxInputFields } from "./apartment-management-filter-min-max-input-fields";
-import { ApartmentManagementFilterSelectMultiple } from "./apartment-management-filter-select-multiple";
+import { ApartmentManagementFilterCheckboxField } from "./apartment-management-filter-checkbox-field"
+import { ApartmentManagementFilterMinMaxInputFields } from "./apartment-management-filter-min-max-input-fields"
+import { ApartmentManagementFilterSelectMultiple } from "./apartment-management-filter-select-multiple"
 
 const furnishingItems = [
   {
     id: "unfurnished",
+    label: "Unfurnished",
     value: "Unfurnished",
-    name: "unfurnished",
   },
   {
     id: "semi-furnished",
+    name: "Semi Furnished",
     value: "Semi Furnished",
-    name: "semi-furnished",
   },
   {
     id: "fully-furnished",
+    label: "Fully Furnished",
     value: "Fully Furnished",
-    name: "fully-furnished",
   },
-];
+]
 
 const availabilityItems = [
   {
     id: "yes",
+    label: "Yes",
     value: "Yes",
-    name: "yes",
   },
   {
     id: "no",
+    label: "No",
     value: "No",
-    name: "yes",
   },
-];
+]
 
 const roomsItems = [
   {
@@ -67,7 +67,7 @@ const roomsItems = [
     title: "Study Room",
     name: "study_room",
   },
-];
+]
 
 const priceCurrencies = [
   {
@@ -78,9 +78,9 @@ const priceCurrencies = [
   {
     id: "dollar",
     label: "Dollar",
-    value: "Dollar",
+    value: "US Dollar",
   },
-];
+]
 
 const propertyPrices = [
   {
@@ -93,7 +93,7 @@ const propertyPrices = [
     title: "Selling Price",
     name: "selling_price",
   },
-];
+]
 
 const leaseTermsTypes = [
   {
@@ -106,7 +106,7 @@ const leaseTermsTypes = [
     label: "Year",
     value: "Year",
   },
-];
+]
 
 export const ApartmentManagementFilterMenu = ({
   control,
@@ -118,49 +118,49 @@ export const ApartmentManagementFilterMenu = ({
     revalidateOnMount: true,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
-  };
+  }
   const {
     data: apartmentPropertyAreaData,
     isLoading: apartmentPropertyAreaDataIsLoading,
   } = usePrivateFetcher(
     [process.env.NEXT_PUBLIC_ENDPOINT_PROPERTY_AREA_READ, {}],
     fetcherConfig
-  );
+  )
   const {
     data: apartmentPaymentTermData,
     isLoading: apartmentPaymentTermDataIsLoading,
   } = usePrivateFetcher(
     [process.env.NEXT_PUBLIC_ENDPOINT_PAYMENT_TERMS_READ, {}],
     fetcherConfig
-  );
+  )
 
   const areaOptions = useMemo(() => {
-    if (!apartmentPropertyAreaData?.data?.attributes) return [];
+    if (!apartmentPropertyAreaData?.data?.attributes) return []
 
     return apartmentPropertyAreaData?.data?.attributes.map((area) => ({
       value: area.region_name,
       label: area.region_name,
-    }));
-  }, [apartmentPropertyAreaData?.data?.attributes]);
+    }))
+  }, [apartmentPropertyAreaData?.data?.attributes])
 
   const apartmentPaymentTermsOptions = useMemo(() => {
-    if (!apartmentPaymentTermData?.data?.attributes) return [];
+    if (!apartmentPaymentTermData?.data?.attributes) return []
 
     return apartmentPaymentTermData?.data?.attributes.map(
       ({ payment_term: paymentTerm }) => ({
         value: paymentTerm,
         label: paymentTerm,
       })
-    );
-  }, [apartmentPaymentTermData?.data?.attributes]);
+    )
+  }, [apartmentPaymentTermData?.data?.attributes])
 
   const onCheckboxCheckedChange = (value, itemValue, field) => {
     if (value) {
-      field.onChange([...field.value, itemValue]);
+      field.onChange([...field.value, itemValue])
     } else {
-      field.onChange(field.value.filter((item) => item !== itemValue));
+      field.onChange(field.value.filter((item) => item !== itemValue))
     }
-  };
+  }
 
   const onResetFilterValues = () => {
     reset(
@@ -206,8 +206,8 @@ export const ApartmentManagementFilterMenu = ({
       {
         keepDefaultValues: true,
       }
-    );
-  };
+    )
+  }
 
   return (
     <DialogRoot>
@@ -255,7 +255,7 @@ export const ApartmentManagementFilterMenu = ({
                 disabled={apartmentPropertyAreaDataIsLoading}
                 options={areaOptions}
                 onChangeValue={(field, value) => {
-                  field.onChange(value.map((area) => area.value));
+                  field.onChange(value.map((area) => area.value))
                 }}
               />
             </div>
@@ -281,7 +281,7 @@ export const ApartmentManagementFilterMenu = ({
                     <div className="grid grid-cols-1 grid-rows-3 gap-5 xl:grid-cols-2 xl:grid-rows-2">
                       {furnishingItems.map((furnishingItem) => (
                         <ApartmentManagementFilterCheckboxField
-                          key={`filter-field-furnishing-${furnishingItem.id}`}
+                          key={`filter-field-furnishings-${furnishingItem.id}`}
                           id={`filter.furnishings.${furnishingItem.id}`}
                           name="filter.furnishing"
                           itemValue={furnishingItem.value}
@@ -298,7 +298,7 @@ export const ApartmentManagementFilterMenu = ({
                     <div className="grid grid-rows-2 gap-5">
                       {availabilityItems.map((availabilityItem) => (
                         <ApartmentManagementFilterCheckboxField
-                          key={`filter-field-availability-${availabilityItem.id}`}
+                          key={`filter-field-availabilities-${availabilityItem.id}`}
                           id={`filter.availabilities.${availabilityItem.id}`}
                           name="filter.availabilities"
                           itemValue={availabilityItem.value}
@@ -341,7 +341,7 @@ export const ApartmentManagementFilterMenu = ({
                 <div className="grid grid-rows-2 gap-5">
                   {priceCurrencies.map((priceCurrency) => (
                     <ApartmentManagementFilterCheckboxField
-                      key={`filter-field-price-currency-${priceCurrency.id}`}
+                      key={`filter-field-price-currencies-${priceCurrency.id}`}
                       id={`filter.price_currencies.${priceCurrency.id}`}
                       name="filter.price_currencies"
                       itemValue={priceCurrency.value}
@@ -385,7 +385,7 @@ export const ApartmentManagementFilterMenu = ({
                   onChangeValue={(field, value) => {
                     field.onChange(
                       value.map((paymentTerm) => paymentTerm.value)
-                    );
+                    )
                   }}
                 />
               </div>
@@ -446,5 +446,5 @@ export const ApartmentManagementFilterMenu = ({
         </DialogContent>
       </DialogPortal>
     </DialogRoot>
-  );
-};
+  )
+}

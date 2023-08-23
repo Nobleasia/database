@@ -113,16 +113,7 @@ export const useApartmentTableColumns = ({
         },
         header: () => "Availability",
         enableColumnFilter: true,
-        filterFn: (row, columnId, filterValue) => {
-          const isAvailable = row.getValue(columnId)
-          const availableStatus = isAvailable ? "Yes" : "No"
-
-          if (filterValue.length === 0) {
-            return true
-          }
-
-          return filterValue.includes(availableStatus)
-        },
+        filterFn: filterArrIncludesSome,
       },
       {
         id: "picName",
@@ -172,7 +163,7 @@ export const useApartmentTableColumns = ({
         accessorFn: (row) => [row.rental_price, row.price_currency],
         cell: (info) => {
           const [price, currency] = info.getValue()
-          return convertNumberToPriceFormat(price, currency)
+          return `${convertNumberToPriceFormat(price, currency)} /month`
         },
         header: () => "Rental Price",
         enableColumnFilter: true,
@@ -194,13 +185,7 @@ export const useApartmentTableColumns = ({
         accessorFn: (row) => row?.property_payment_term?.payment_term,
         header: () => "Payment Terms",
         enableColumnFilter: true,
-        filterFn: (row, columnId, filterValue) => {
-          if (filterValue.length === 0) return true
-
-          const rowValue = row.getValue(columnId)
-
-          return filterValue.includes(rowValue)
-        },
+        filterFn: filterArrIncludesSome,
       },
       {
         id: "leaseTerms",

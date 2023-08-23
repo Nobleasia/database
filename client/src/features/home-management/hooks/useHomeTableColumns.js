@@ -124,16 +124,7 @@ export const useHomeTableColumns = ({
         },
         header: () => "Backyard",
         enableColumnFilter: true,
-        filterFn: (row, columnId, filterValue) => {
-          const isBackyard = row.getValue(columnId)
-          const backyardStatus = isBackyard ? "Yes" : "No"
-
-          if (filterValue.length === 0) {
-            return true
-          }
-
-          return filterValue.includes(backyardStatus)
-        },
+        filterFn: filterArrIncludesSome,
       },
       {
         id: "swimmingPool",
@@ -147,16 +138,7 @@ export const useHomeTableColumns = ({
         },
         header: () => "Swimming Pool",
         enableColumnFilter: true,
-        filterFn: (row, columnId, filterValue) => {
-          const isSwimmingPool = row.getValue(columnId)
-          const swimmingPoolStatus = isSwimmingPool ? "Yes" : "No"
-
-          if (filterValue.length === 0) {
-            return true
-          }
-
-          return filterValue.includes(swimmingPoolStatus)
-        },
+        filterFn: filterArrIncludesSome,
       },
       {
         id: "houseType",
@@ -177,16 +159,7 @@ export const useHomeTableColumns = ({
         },
         header: () => "Availability",
         enableColumnFilter: true,
-        filterFn: (row, columnId, filterValue) => {
-          const isAvailable = row.getValue(columnId)
-          const availableStatus = isAvailable ? "Yes" : "No"
-
-          if (filterValue.length === 0) {
-            return true
-          }
-
-          return filterValue.includes(availableStatus)
-        },
+        filterFn: filterArrIncludesSome,
       },
       {
         id: "picName",
@@ -236,7 +209,7 @@ export const useHomeTableColumns = ({
         accessorFn: (row) => [row.rental_price, row.price_currency],
         cell: (info) => {
           const [price, currency] = info.getValue()
-          return convertNumberToPriceFormat(price, currency)
+          return `${convertNumberToPriceFormat(price, currency)} /month`
         },
         header: () => "Rental Price",
         enableColumnFilter: true,
