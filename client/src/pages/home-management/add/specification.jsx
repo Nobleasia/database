@@ -257,7 +257,7 @@ const Specification = ({ backyard, swimmingPool, houseType, furnishing }) => {
                 type="number"
                 id="carport_or_garage"
                 min={0}
-                placeholder="Home study room unit"
+                placeholder="Carport/Garage unit"
                 disabled={isSubmitting}
                 isSubmitted={isSubmitted}
                 isTouched={isTouched}
