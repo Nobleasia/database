@@ -426,7 +426,7 @@ const PropertyPartialan = ({ columns }) => {
             <Link href="/apartment-management">
               <MdArrowBack className="h-5 w-5" />
             </Link>
-            <TitlePage>Property Partialan</TitlePage>
+            <TitlePage>Property Particular</TitlePage>
           </div>
           <BreadcrumbsContainer>
             <BreadcrumbsItem href="/apartment-management" disabled>
