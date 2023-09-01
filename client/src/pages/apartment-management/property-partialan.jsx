@@ -448,7 +448,7 @@ const PropertyPartialan = ({ columns }) => {
         <section className="flex flex-col rounded-md bg-white p-5">
           <div className="flex flex-col gap-2">
             <h2 className="text-lg font-semibold">
-              Property Partialan Properties
+              Property Particular Properties
             </h2>
             <h3 className="text-sm text-npa-info-400">
               Please pay attention to this section, before submitting.
