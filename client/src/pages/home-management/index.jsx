@@ -283,7 +283,7 @@ const HomeManagement = ({ showColumnFieldItems }) => {
                   className="h-full w-full text-center"
                   tabIndex={-1}
                 >
-                  Property Partialan
+                  Property Particular
                 </Button>
               </Link>
               {auth?.user_role !== "user" && (
