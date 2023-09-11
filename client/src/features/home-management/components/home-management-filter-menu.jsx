@@ -1,24 +1,21 @@
-import cn from "classnames"
-import { useMemo } from "react"
-import { MdClose, MdFilterList } from "react-icons/md"
+import cn from "classnames";
+import { useMemo } from "react";
+import { MdClose, MdFilterList } from "react-icons/md";
 
-import { usePrivateFetcher } from "@/hooks"
 
-import {
-  Button,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogOverlay,
-  DialogPortal,
-  DialogRoot,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components"
 
-import { HomeManagementFilterCheckboxField } from "./home-management-filter-checkbox-field"
-import { HomeManagementFilterMinMaxInputFields } from "./home-management-filter-min-max-input-fields"
-import { HomeManagementFilterSelectMultiple } from "./home-management-filter-select-multiple"
+import { usePrivateFetcher } from "@/hooks";
+
+
+
+import { Button, DialogClose, DialogContent, DialogDescription, DialogOverlay, DialogPortal, DialogRoot, DialogTitle, DialogTrigger } from "@/components";
+
+
+
+import { HomeManagementFilterCheckboxField } from "./home-management-filter-checkbox-field";
+import { HomeManagementFilterMinMaxInputFields } from "./home-management-filter-min-max-input-fields";
+import { HomeManagementFilterSelectMultiple } from "./home-management-filter-select-multiple";
+
 
 const furnishingItems = [
   {
@@ -127,7 +124,7 @@ const priceCurrencies = [
   {
     id: "dollar",
     label: "Dollar",
-    value: "Dollar",
+    value: "US Dollar",
   },
 ]
 

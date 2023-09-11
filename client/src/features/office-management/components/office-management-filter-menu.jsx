@@ -60,7 +60,7 @@ const priceCurrencies = [
   {
     id: "dollar",
     label: "Dollar",
-    value: "Dollar",
+    value: "US Dollar",
   },
 ]
 
