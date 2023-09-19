@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { Controller, useForm, useWatch } from "react-hook-form";
-import { MdClose } from "react-icons/md";
+import { useEffect, useState } from "react"
+import { Controller, useForm, useWatch } from "react-hook-form"
+import { MdClose } from "react-icons/md"
 
-import { useAxiosPrivate, useHandleToast } from "@/hooks";
+import { useAxiosPrivate, useHandleToast } from "@/hooks"
 
 import {
   AlertInputError,
@@ -19,10 +19,10 @@ import {
   Label,
   Placeholder,
   SelectSearchable,
-} from "@/components";
+} from "@/components"
 
-import { useHandleDisablingSubmitButtonDialog } from "../hooks/useHandleDisablingSubmitButtonDialog";
-import { UserManagementDialogButton } from "./user-management-dialog-button";
+import { useHandleDisablingSubmitButtonDialog } from "../hooks/useHandleDisablingSubmitButtonDialog"
+import { UserManagementDialogButton } from "./user-management-dialog-button"
 
 export const AddUserDialog = ({
   id = "",
@@ -33,13 +33,13 @@ export const AddUserDialog = ({
   password = "",
   mutateDataOrigin,
 }) => {
-  const instance = useAxiosPrivate();
-  const { handleToggleToast } = useHandleToast();
+  const instance = useAxiosPrivate()
+  const { handleToggleToast } = useHandleToast()
 
   const roleOptions = [
     { label: "Admin", value: "admin" },
     { label: "User", value: "user" },
-  ];
+  ]
 
   const {
     control,
@@ -55,29 +55,29 @@ export const AddUserDialog = ({
       role,
       password,
     },
-  });
+  })
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   const submitButtonIsDisable = useHandleDisablingSubmitButtonDialog({
     dirtyFields,
     errors,
     isEditMode,
     isSubmitting,
-  });
+  })
 
   const [watchUsername, watchFullname, watchRole, watchPassword] = useWatch({
     control,
     name: ["username", "fullname", "role", "password"],
-  });
+  })
 
   const onSubmit = async (payload) => {
     const successMessage = isEditMode
       ? "Successfully updated an user"
-      : "Successfully created an user";
+      : "Successfully created an user"
     const ENDPOINT = isEditMode
-      ? `${process.env.NEXT_PUBLIC_ENDPOINT_USER_UPDATE}/${id}`
-      : `${process.env.NEXT_PUBLIC_ENDPOINT_USER_CREATE}`;
-    const METHOD = isEditMode ? "PUT" : "POST";
+      ? `${process.env.NEXT_PUBLIC_ENDPOINT_USER_UPDATE}/${username}`
+      : `${process.env.NEXT_PUBLIC_ENDPOINT_USER_CREATE}`
+    const METHOD = isEditMode ? "PUT" : "POST"
 
     const payloadData = isEditMode
       ? {
@@ -86,7 +86,7 @@ export const AddUserDialog = ({
           role: payload.role,
           password: payload.password,
         }
-      : payload;
+      : payload
 
     await instance({
       url: ENDPOINT,
@@ -95,26 +95,26 @@ export const AddUserDialog = ({
       headers: {
         "Content-Type": "application/json",
       },
-    });
+    })
 
-    await mutateDataOrigin();
+    await mutateDataOrigin()
 
     handleToggleToast({
       open: true,
       variant: "success",
       message: successMessage,
-    });
+    })
 
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   const onErrors = (errors) => {
-    console.error(errors);
+    console.error(errors)
     handleToggleToast({
       open: true,
       variant: "error",
       message: errors.message,
-    });
+    })
 
     reset(
       (formValues) => ({
@@ -128,8 +128,8 @@ export const AddUserDialog = ({
         keepIsValid: true,
         keepDefaultValues: false,
       }
-    );
-  };
+    )
+  }
 
   useEffect(() => {
     if (open && isEditMode) {
@@ -148,7 +148,7 @@ export const AddUserDialog = ({
           keepValues: false,
           keepDefaultValues: false,
         }
-      );
+      )
     }
 
     if (!open) {
@@ -162,9 +162,9 @@ export const AddUserDialog = ({
         {
           keepDefaultValues: true,
         }
-      );
+      )
     }
-  }, [open]);
+  }, [open])
 
   return (
     <DialogRoot open={open} onOpenChange={(open) => setOpen(open)}>
@@ -183,14 +183,14 @@ export const AddUserDialog = ({
         >
           <form
             onSubmit={async (event) => {
-              event.preventDefault();
+              event.preventDefault()
               trigger(["fullname", "phone_number", "role_id", "company_id"], {
                 shouldFocus: true,
-              });
+              })
 
               await handleSubmit(onSubmit)(event).catch((error) => {
-                onErrors(error);
-              });
+                onErrors(error)
+              })
             }}
           >
             <div className="flex items-center justify-between border-b-1 border-b-npa-neutral-300 pb-2">
@@ -306,7 +306,7 @@ export const AddUserDialog = ({
                           ) || ""
                         }
                         onValueChange={(value) => {
-                          field.onChange(value?.value || "");
+                          field.onChange(value?.value || "")
                         }}
                       />
                       {error ? (
@@ -372,5 +372,5 @@ export const AddUserDialog = ({
         </DialogContent>
       </DialogPortal>
     </DialogRoot>
-  );
-};
+  )
+}

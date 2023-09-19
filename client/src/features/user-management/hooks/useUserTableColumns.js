@@ -1,8 +1,8 @@
-import { useMemo } from "react";
+import { useMemo } from "react"
 
-import { dateFormatter } from "@/utils";
+import { dateFormatter } from "@/utils"
 
-import { UserManagementTableActionButtons } from "../components/user-management-table-action-buttons";
+import { UserManagementTableActionButtons } from "../components/user-management-table-action-buttons"
 
 export const useUserTableColumns = ({
   handleDeleteDataOrigin,
@@ -18,7 +18,7 @@ export const useUserTableColumns = ({
             username: row?.username,
             fullname: row?.fullname,
             role: row?.role,
-          };
+          }
         },
         cell: (info) => {
           return (
@@ -28,7 +28,7 @@ export const useUserTableColumns = ({
               mutateDataOrigin={mutateDataOrigin}
               handleDeleteDataOrigin={handleDeleteDataOrigin}
             />
-          );
+          )
         },
         header: () => "Actions",
       },
@@ -50,8 +50,8 @@ export const useUserTableColumns = ({
         cell: (info) => dateFormatter(info.getValue()),
         header: () => "Last Update",
       },
-    ];
-  }, []);
+    ]
+  }, [])
 
-  return tableColumns;
-};
+  return tableColumns
+}

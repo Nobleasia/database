@@ -85,8 +85,6 @@ const ApartementManagement = ({ showColumnFieldItems }) => {
 
   const [columnFilters, setColumnFilters] = useState([])
 
-  console.log(columnFilters)
-
   const [
     // eslint-disable-next-line no-unused-vars
     queryWatch,

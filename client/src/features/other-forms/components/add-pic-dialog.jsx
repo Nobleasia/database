@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
-import { Controller, useForm, useWatch } from "react-hook-form";
-import { MdClose } from "react-icons/md";
+import { useEffect, useMemo, useState } from "react"
+import { Controller, useForm, useWatch } from "react-hook-form"
+import { MdClose } from "react-icons/md"
 
-import { useAxiosPrivate, useHandleToast, usePrivateFetcher } from "@/hooks";
+import { useAxiosPrivate, useHandleToast, usePrivateFetcher } from "@/hooks"
 
 import {
   AlertInputError,
@@ -19,10 +19,10 @@ import {
   Label,
   Placeholder,
   SelectSearchable,
-} from "@/components";
+} from "@/components"
 
-import { useHandleDisablingSubmitButtonDialog } from "../hooks/useHandleDisablingSubmitButtonDialog";
-import { OtherFormsDialogButton } from "./other-forms-dialog-button";
+import { useHandleDisablingSubmitButtonDialog } from "../hooks/useHandleDisablingSubmitButtonDialog"
+import { OtherFormsDialogButton } from "./other-forms-dialog-button"
 
 export const AddPicDialog = ({
   id = "",
@@ -33,8 +33,8 @@ export const AddPicDialog = ({
   companyName = "",
   mutateDataOrigin,
 }) => {
-  const instance = useAxiosPrivate();
-  const { handleToggleToast } = useHandleToast();
+  const instance = useAxiosPrivate()
+  const { handleToggleToast } = useHandleToast()
 
   const {
     data: picRoleData,
@@ -47,7 +47,7 @@ export const AddPicDialog = ({
       revalidateOnFocus: true,
       revalidateOnReconnect: true,
     }
-  );
+  )
 
   const {
     data: picCompanyData,
@@ -60,7 +60,7 @@ export const AddPicDialog = ({
       revalidateOnFocus: true,
       revalidateOnReconnect: true,
     }
-  );
+  )
 
   const {
     control,
@@ -78,50 +78,50 @@ export const AddPicDialog = ({
       role: roleName,
       company: companyName,
     },
-  });
+  })
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   const submitButtonIsDisable = useHandleDisablingSubmitButtonDialog({
     dirtyFields,
     errors,
     isEditMode,
     isSubmitting,
-  });
+  })
 
   const [watchPicName, watchPhoneNumber, watchRoleName, watchCompanyName] =
     useWatch({
       control,
       name: ["fullname", "phone_number", "role", "company"],
-    });
+    })
 
   const roleOptions = useMemo(() => {
-    if (!picRoleData?.data?.attributes.length === 0) return [];
+    if (!picRoleData?.data?.attributes.length === 0) return []
 
     return picRoleData?.data?.attributes.map((role) => ({
       value: role.name,
       label: role.name,
       id: role.id,
-    }));
-  }, [picRoleData, picRoleIsLoading]);
+    }))
+  }, [picRoleData, picRoleIsLoading])
 
   const companyOptions = useMemo(() => {
-    if (!picCompanyData?.data?.attributes.length === 0) return [];
+    if (!picCompanyData?.data?.attributes.length === 0) return []
 
     return picCompanyData?.data?.attributes.map((company) => ({
       value: company.name,
       label: company.name,
       id: company.id,
-    }));
-  }, [picCompanyData, picCompanyIsLoading]);
+    }))
+  }, [picCompanyData, picCompanyIsLoading])
 
   const onSubmit = async (payload) => {
     const successMessage = isEditMode
       ? "Successfully updated PIC"
-      : "Successfully created PIC";
+      : "Successfully created PIC"
     const ENDPOINT = isEditMode
       ? `${process.env.NEXT_PUBLIC_ENDPOINT_PIC_UPDATE}/${id}`
-      : `${process.env.NEXT_PUBLIC_ENDPOINT_PIC_CREATE}`;
-    const METHOD = isEditMode ? "PUT" : "POST";
+      : `${process.env.NEXT_PUBLIC_ENDPOINT_PIC_CREATE}`
+    const METHOD = isEditMode ? "PUT" : "POST"
 
     const payloadData = isEditMode
       ? {
@@ -130,7 +130,7 @@ export const AddPicDialog = ({
           new_role: payload.role,
           new_company: payload.company,
         }
-      : payload;
+      : payload
 
     await instance({
       url: ENDPOINT,
@@ -139,28 +139,28 @@ export const AddPicDialog = ({
       headers: {
         "Content-Type": "application/json",
       },
-    });
+    })
 
-    await mutateDataOrigin();
-    await mutatePicRole();
-    await mutatePicCompany();
+    await mutateDataOrigin()
+    await mutatePicRole()
+    await mutatePicCompany()
 
     handleToggleToast({
       open: true,
       variant: "success",
       message: successMessage,
-    });
+    })
 
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   const onErrors = (errors) => {
-    console.error(errors);
+    console.error(errors)
     handleToggleToast({
       open: true,
       variant: "error",
       message: errors.message,
-    });
+    })
 
     reset(
       (formValues) => ({
@@ -174,8 +174,8 @@ export const AddPicDialog = ({
         keepIsValid: true,
         keepDefaultValues: false,
       }
-    );
-  };
+    )
+  }
 
   useEffect(() => {
     if (open && isEditMode) {
@@ -194,7 +194,7 @@ export const AddPicDialog = ({
           keepValues: false,
           keepDefaultValues: false,
         }
-      );
+      )
     }
 
     if (!open) {
@@ -208,9 +208,9 @@ export const AddPicDialog = ({
         {
           keepDefaultValues: true,
         }
-      );
+      )
     }
-  }, [open]);
+  }, [open])
 
   return (
     <DialogRoot open={open} onOpenChange={(open) => setOpen(open)}>
@@ -229,14 +229,14 @@ export const AddPicDialog = ({
         >
           <form
             onSubmit={async (event) => {
-              event.preventDefault();
+              event.preventDefault()
               trigger(["fullname", "phone_number", "role_id", "company_id"], {
                 shouldFocus: true,
-              });
+              })
 
               await handleSubmit(onSubmit)(event).catch((error) => {
-                onErrors(error);
-              });
+                onErrors(error)
+              })
             }}
           >
             <div className="flex items-center justify-between border-b-1 border-b-npa-neutral-300 pb-2">
@@ -310,20 +310,20 @@ export const AddPicDialog = ({
                         isTouched={isTouched}
                         isError={error}
                         onChange={(event) => {
-                          const { value } = event.target;
+                          const { value } = event.target
                           const isCustomInvalid =
-                            value.match(/^08\d{8,11}$/gi) === null;
+                            value.match(/^08\d{8,11}$/gi) === null
 
                           if (value.length > 0 && isCustomInvalid) {
                             setError("phone_number", {
                               type: "custom",
                               message: "Phone number is not valid",
-                            });
+                            })
                           } else {
-                            clearErrors("phone_number");
+                            clearErrors("phone_number")
                           }
 
-                          field.onChange(value);
+                          field.onChange(value)
                         }}
                       />
 
@@ -372,7 +372,7 @@ export const AddPicDialog = ({
                           ) || ""
                         }
                         onValueChange={(value) => {
-                          field.onChange(value?.value || "");
+                          field.onChange(value?.value || "")
                         }}
                       />
                       {error ? (
@@ -420,7 +420,7 @@ export const AddPicDialog = ({
                           ) || ""
                         }
                         onValueChange={(value) => {
-                          field.onChange(value?.value || "");
+                          field.onChange(value?.value || "")
                         }}
                       />
                       {error ? (
@@ -453,5 +453,5 @@ export const AddPicDialog = ({
         </DialogContent>
       </DialogPortal>
     </DialogRoot>
-  );
-};
+  )
+}

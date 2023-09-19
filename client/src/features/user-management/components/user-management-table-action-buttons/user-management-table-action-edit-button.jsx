@@ -1,4 +1,4 @@
-import { AddUserDialog } from "../add-user-dialog";
+import { AddUserDialog } from "../add-user-dialog"
 
 export const UserManagementTableActionEditButton = ({
   editFormNameId,
@@ -7,9 +7,9 @@ export const UserManagementTableActionEditButton = ({
 }) => {
   const editFormNameIdObject = {
     user: AddUserDialog,
-  };
+  }
 
-  const EditFormComponent = editFormNameIdObject[editFormNameId];
+  const EditFormComponent = editFormNameIdObject[editFormNameId]
 
   return (
     <EditFormComponent
@@ -17,5 +17,5 @@ export const UserManagementTableActionEditButton = ({
       isEditMode
       mutateDataOrigin={mutateDataOrigin}
     />
-  );
-};
+  )
+}
