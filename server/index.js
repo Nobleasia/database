@@ -115,6 +115,7 @@ const {
 
 const { PORT } = require("./utils/config");
 const { connectToDatabase } = require("./utils/db");
+const backupDatabase = require("./utils/backup_database");
 
 const corsOptions = {
   origin: [
@@ -270,6 +271,8 @@ app.use("/users/delete", deleteUserRouter);
 app.use("/logs/read", logsRouter);
 
 deleteExpiredData();
+
+backupDatabase();
 
 const main = async () => {
   await connectToDatabase();
