@@ -1,16 +1,11 @@
 /* eslint-disable no-nested-ternary */
-import {
-  Document,
-  Font,
-  Image,
-  Page,
-  Text,
-  View,
-  pdf,
-} from "@react-pdf/renderer"
-import { saveAs } from "file-saver"
+import { Document, Font, Image, Page, Text, View, pdf } from "@react-pdf/renderer";
+import { saveAs } from "file-saver";
 
-import { convertNumberToPriceFormat } from "@/utils"
+
+
+import { convertNumberToPriceFormat } from "@/utils";
+
 
 export const generatePDF = async (response, instance) => {
   const currentDate = new Date()
@@ -1880,7 +1875,7 @@ export const generatePDF = async (response, instance) => {
               </Text>
               <Text style={{ fontSize: 10 }}>
                 www.nobleasia.id | inquiry@noblepropertiesasia.com | +62
-                813-1668-5505 | @nobleproperties
+                813-1668-5505 | @noblepropertiesasia
               </Text>
             </View>
           </View>

@@ -1669,7 +1669,7 @@ export const generatePDF = async (response, instance) => {
               </Text>
               <Text style={{ fontSize: 10 }}>
                 www.nobleasia.id | inquiry@noblepropertiesasia.com | +62
-                813-1668-5505 | @nobleproperties
+                813-1668-5505 | @noblepropertiesasia
               </Text>
             </View>
           </View>

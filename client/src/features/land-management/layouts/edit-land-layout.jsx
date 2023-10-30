@@ -294,8 +294,8 @@ export const EditLandLayout = ({ children }) => {
               pic: {
                 fullname: PIC?.fullname,
                 phone_number: PIC?.phone_number,
-                company: PIC?.property_person_in_charge_company.name,
-                role: PIC?.property_person_in_charge_role.name,
+                company: PIC?.property_person_in_charge_company?.name,
+                role: PIC?.property_person_in_charge_role?.name,
               },
               available: available === "Yes",
               property_area: propertyArea.region_name,

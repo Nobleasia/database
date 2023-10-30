@@ -76,8 +76,8 @@ export const useLandTableColumns = ({
         accessorKey: "zone",
         cell: (info) => {
           return (
-            <Badge variant={info.getValue().toLowerCase()}>
-              {info.getValue()}
+            <Badge variant={info?.getValue()?.toLowerCase()}>
+              {info?.getValue()?.value}
             </Badge>
           )
         },
@@ -102,8 +102,10 @@ export const useLandTableColumns = ({
         id: "picRole",
         accessorKey: "property_person_in_charge",
         cell: (info) => {
-          const { name } = info.getValue().property_person_in_charge_role
-          return name
+          const propertyPersonInChargeRole =
+            info.getValue()?.property_person_in_charge_role
+          const name = propertyPersonInChargeRole?.name
+          return name || "Unknown" // Provide a default value if 'name' is null
         },
         header: () => "PIC Role",
       },

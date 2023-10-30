@@ -1,16 +1,27 @@
-import { useRouter } from "next/router"
-import { useEffect, useMemo } from "react"
-import { useForm } from "react-hook-form"
+import { useRouter } from "next/router";
+import { useEffect, useMemo } from "react";
+import { useForm } from "react-hook-form";
 
-import { EditItemLayout, getAdminLayout } from "@/layouts"
 
-import { useAuth, useAxiosPrivate, useHandleToast } from "@/hooks"
 
-import { Toast, ToastProvider, ToastViewport } from "@/components"
+import { EditItemLayout, getAdminLayout } from "@/layouts";
 
-import { convertToFormData, numberValidationObject } from "@/utils"
 
-import { handleFacilitiesValues } from "../utils"
+
+import { useAuth, useAxiosPrivate, useHandleToast } from "@/hooks";
+
+
+
+import { Toast, ToastProvider, ToastViewport } from "@/components";
+
+
+
+import { convertToFormData, numberValidationObject } from "@/utils";
+
+
+
+import { handleFacilitiesValues } from "../utils";
+
 
 const STEPS_OBJECT = {
   1: "First Step",
@@ -140,6 +151,8 @@ export const EditHomeLayout = ({ children }) => {
       ...othersPayload
     } = payload
 
+    console.log("payloadData before processing:", payload)
+
     const {
       rental_price: rentalPriceNumber,
       selling_price: sellingPriceNumber,
@@ -158,6 +171,8 @@ export const EditHomeLayout = ({ children }) => {
       carport_or_garage,
       rental_price,
       selling_price,
+      compound_fee,
+      compound_fee_coverage,
       lease_term_time,
       vat_percentage,
       wht_percentage,
@@ -177,6 +192,8 @@ export const EditHomeLayout = ({ children }) => {
         wht_percentage: whtPercentageNumber,
       },
     }
+
+    console.log("payloadData after processing:", payloadData)
 
     const facilitiesValues = handleFacilitiesValues(
       payload.old_facilities,
