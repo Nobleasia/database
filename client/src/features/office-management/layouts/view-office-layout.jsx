@@ -51,7 +51,7 @@ const tabsDetails = [
 ]
 
 export const ViewOfficeLayout = ({ children }) => {
-  const { query } = useRouter()
+  const { query, back } = useRouter()
   const { officeAttributes, officeDataIsLoading } = useViewOfficeData()
   const fetchBlob = useFetchBlob()
 
@@ -108,9 +108,9 @@ export const ViewOfficeLayout = ({ children }) => {
       </Head>
       <HeaderPage>
         <div className="flex items-center gap-4">
-          <Link href="/office-management">
+          <button onClick={() => back()}>
             <MdArrowBack className="h-5 w-5" />
-          </Link>
+          </button>
           <TitlePage>View Office</TitlePage>
         </div>
 

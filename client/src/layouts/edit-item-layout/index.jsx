@@ -1,23 +1,23 @@
 /* eslint-disable no-unused-vars */
-import * as SeparatorRadix from "@radix-ui/react-separator";
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useMemo, useState } from "react";
-import { FormProvider } from "react-hook-form";
-import { MdArrowBack } from "react-icons/md";
-import { SWRConfig } from "swr";
+import * as SeparatorRadix from "@radix-ui/react-separator"
+import Head from "next/head"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { useMemo, useState } from "react"
+import { FormProvider } from "react-hook-form"
+import { MdArrowBack } from "react-icons/md"
+import { SWRConfig } from "swr"
 
-import { useHandleToast } from "@/hooks";
+import { useHandleToast } from "@/hooks"
 
 import {
   BreadcrumbsContainer,
   BreadcrumbsItem,
   HeaderPage,
   TitlePage,
-} from "@/components";
+} from "@/components"
 
-import { toCapitalize } from "@/utils";
+import { toCapitalize } from "@/utils"
 
 import {
   BackButton,
@@ -25,7 +25,7 @@ import {
   ContinueButton,
   CreateNewItemSection,
   SubmitButton,
-} from "./components";
+} from "./components"
 
 export const EditItemLayout = ({
   children = null,
@@ -40,30 +40,31 @@ export const EditItemLayout = ({
   sectionItems = [],
   stepsObject = [],
 }) => {
-  const { query, replace, asPath } = useRouter();
+  const { back } = useRouter()
+  const { query, replace, asPath } = useRouter()
 
   const [currentActiveSectionNumber, setCurrentActiveSectionNumber] =
-    useState(1);
+    useState(1)
 
   const currentActiveSection = useMemo(() => {
     const activeSection = sectionItems.find(
       (item) => item.numberOfSection === currentActiveSectionNumber
-    );
-    const activeStep = stepsObject && stepsObject[currentActiveSectionNumber];
-    return { activeStep, ...activeSection };
-  }, [currentActiveSectionNumber]);
+    )
+    const activeStep = stepsObject && stepsObject[currentActiveSectionNumber]
+    return { activeStep, ...activeSection }
+  }, [currentActiveSectionNumber])
 
   const prevAndNextSections = useMemo(() => {
     const nextActiveSection = sectionItems.find(
       (item) => item.numberOfSection === currentActiveSectionNumber + 1
-    );
+    )
 
     const prevActiveSection = sectionItems.find(
       (item) => item.numberOfSection === currentActiveSectionNumber - 1
-    );
+    )
 
-    return { nextActiveSection, prevActiveSection };
-  }, [currentActiveSectionNumber]);
+    return { nextActiveSection, prevActiveSection }
+  }, [currentActiveSectionNumber])
 
   const pathnames = useMemo(() => {
     return asPath
@@ -75,8 +76,8 @@ export const EditItemLayout = ({
             ? query.slug
             : toCapitalize(item.replace(/[-]/gi, " ")),
         href: item,
-      }));
-  }, [asPath]);
+      }))
+  }, [asPath])
 
   return (
     <>
@@ -89,9 +90,9 @@ export const EditItemLayout = ({
 
       <HeaderPage>
         <div className="flex items-center gap-4">
-          <Link href={rootPath}>
+          <button onClick={() => back()}>
             <MdArrowBack className="h-5 w-5" />
-          </Link>
+          </button>
           <TitlePage>{title}</TitlePage>
         </div>
 
@@ -209,9 +210,9 @@ export const EditItemLayout = ({
         </section>
       </div>
     </>
-  );
-};
+  )
+}
 
 export const getEditItemLayout = (page) => {
-  return <EditItemLayout>{page}</EditItemLayout>;
-};
+  return <EditItemLayout>{page}</EditItemLayout>
+}

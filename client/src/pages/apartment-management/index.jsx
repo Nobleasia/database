@@ -1,6 +1,7 @@
 import Head from "next/head"
 import Link from "next/link"
-import { useMemo, useState } from "react"
+import { useRouter } from "next/router"
+import { useEffect, useMemo, useState } from "react"
 import { Controller, useForm, useWatch } from "react-hook-form"
 import { AiFillPlusCircle } from "react-icons/ai"
 import { MdSearch, MdViewColumn } from "react-icons/md"
@@ -33,6 +34,7 @@ import {
 } from "@/features/apartment-management"
 
 const ApartementManagement = ({ showColumnFieldItems }) => {
+  const router = useRouter()
   const { auth } = useAuth()
   const instance = useAxiosPrivate()
   const { toast, handleToggleToast } = useHandleToast()

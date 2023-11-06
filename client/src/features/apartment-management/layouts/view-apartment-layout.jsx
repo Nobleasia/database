@@ -51,7 +51,7 @@ const tabsDetails = [
 ]
 
 export const ViewApartmentLayout = ({ children }) => {
-  const { query } = useRouter()
+  const { query, back } = useRouter()
   const { apartmentAttributes, apartmentDataIsLoading } = useViewApartmentData()
   const fetchBlob = useFetchBlob()
 
@@ -109,9 +109,9 @@ export const ViewApartmentLayout = ({ children }) => {
       </Head>
       <HeaderPage>
         <div className="flex items-center gap-4">
-          <Link href="/apartment-management">
+          <button type="button" onClick={() => back()}>
             <MdArrowBack className="h-5 w-5" />
-          </Link>
+          </button>
           <TitlePage>View Apartment</TitlePage>
         </div>
 
@@ -353,7 +353,8 @@ export const ViewApartmentLayout = ({ children }) => {
                           Rental Price
                         </h4>
                         <p className="font-medium">
-                          {apartmentAttributes.convertedPrices.rentalPrice} /month
+                          {apartmentAttributes.convertedPrices.rentalPrice}{" "}
+                          /month
                         </p>
                       </div>
                     </div>
@@ -364,6 +365,7 @@ export const ViewApartmentLayout = ({ children }) => {
                   <div className="flex items-center gap-4 overflow-x-auto py-4 scrollbar-thin scrollbar-track-npa-neutral-200 scrollbar-thumb-npa-neutral-400/60 scrollbar-thumb-rounded-lg lg:gap-8 xl:gap-12">
                     {tabsDetails.map(({ value, title, href }) => (
                       <Link
+                        replace
                         href={`/apartment-management/view/${query.slug}/${href}`}
                         key={`tab-detail-${value}`}
                         className={cn("whitespace-nowrap font-medium", {

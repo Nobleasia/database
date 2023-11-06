@@ -1,6 +1,6 @@
-import cn from "classnames";
-import Link from "next/link";
-import { MdCheck } from "react-icons/md";
+import cn from "classnames"
+import Link from "next/link"
+import { MdCheck } from "react-icons/md"
 
 export const CreateNewItemSectionItem = ({
   to,
@@ -15,6 +15,7 @@ export const CreateNewItemSectionItem = ({
 }) => {
   return (
     <Link
+      replace
       className={cn("flex items-center gap-3 font-medium", {
         "pointer-events-none text-inherit": isActive,
       })}
@@ -50,5 +51,5 @@ export const CreateNewItemSectionItem = ({
         {sectionTitle}
       </h3>
     </Link>
-  );
-};
+  )
+}

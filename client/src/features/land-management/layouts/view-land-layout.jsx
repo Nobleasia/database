@@ -44,7 +44,7 @@ const tabsDetails = [
 ]
 
 export const ViewLandLayout = ({ children }) => {
-  const { query } = useRouter()
+  const { query, back } = useRouter()
   const { landAttributes, landDataIsLoading } = useViewLandData()
   const fetchBlob = useFetchBlob()
 
@@ -101,9 +101,13 @@ export const ViewLandLayout = ({ children }) => {
       </Head>
       <HeaderPage>
         <div className="flex items-center gap-4">
-          <Link href="/land-management">
+          <button
+            onClick={() => {
+              back()
+            }}
+          >
             <MdArrowBack className="h-5 w-5" />
-          </Link>
+          </button>
           <TitlePage>View Land</TitlePage>
         </div>
 

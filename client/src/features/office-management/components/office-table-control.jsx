@@ -8,6 +8,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
+import { useRouter } from "next/router"
 import { useEffect, useMemo, useState } from "react"
 import { MdOutlineArrowRightAlt } from "react-icons/md"
 
@@ -32,6 +33,7 @@ export const OfficeTableControl = ({
   columnFilters = [],
   setColumnFilters = () => {},
 }) => {
+  const router = useRouter()
   const { handleToggleToast } = useHandleToast()
   const queryWatchDebounced = useDebounce(queryWatch, 500)
 
@@ -69,11 +71,27 @@ export const OfficeTableControl = ({
   }, [pageIndexWatch, pageSizeWatch, setPagination, setValue])
 
   useEffect(() => {
-    setPagination({
-      pageIndex,
-      pageSize,
+    router.push({
+      pathname: router.pathname,
+      query: {
+        ...router.query,
+        page: pageIndex + 1,
+      },
     })
-  }, [pageIndex, pageSize, setPagination])
+  }, [pageIndex, pageSize])
+
+  useEffect(() => {
+    const page = router.query?.page
+    if (page) {
+      const pageIndex = Number(page) - 1
+      setPagination(() => {
+        return {
+          pageIndex,
+          pageSize,
+        }
+      })
+    }
+  }, [])
 
   const table = useReactTable({
     data: tableData,
@@ -89,12 +107,6 @@ export const OfficeTableControl = ({
     enableFilters: true,
     enableSorting: true,
     onColumnFiltersChange: setColumnFilters,
-    onPaginationChange: (newPagination) => {
-      // Update the pageIndex and pageSize when the pagination changes
-      setPagination(newPagination)
-      setValue("pageIndex", newPagination.pageIndex)
-      setValue("pageSize", newPagination.pageSize)
-    },
     onSortingChange: setSorting,
     globalFilterFn: globalFilterFuzzy,
     getFilteredRowModel: getFilteredRowModel(),
@@ -162,7 +174,14 @@ export const OfficeTableControl = ({
               disabled={
                 isLoading || data.length <= 0 || !table.getCanPreviousPage()
               }
-              onClick={() => table.previousPage()}
+              onClick={() => {
+                setPagination((prev) => {
+                  return {
+                    ...prev,
+                    pageIndex: prev.pageIndex - 1,
+                  }
+                })
+              }}
               className="flex items-center gap-1 rounded-tl-md rounded-bl-md border-1 border-r-[0.5px] border-r-white/40 bg-npa-charcoal-300 px-3 py-2 text-npa-charcoal-25 transition-all duration-200 disabled:cursor-not-allowed disabled:bg-npa-neutral-50 disabled:text-npa-neutral-400/80 hover:[&:not(:disabled)]:bg-npa-charcoal-400 hover:[&:not(:disabled)]:text-npa-neutral-25"
             >
               <MdOutlineArrowRightAlt className="h-6 w-6 rotate-180" />
@@ -174,7 +193,14 @@ export const OfficeTableControl = ({
               disabled={
                 isLoading || data.length <= 0 || !table.getCanNextPage()
               }
-              onClick={() => table.nextPage()}
+              onClick={() => {
+                setPagination((prev) => {
+                  return {
+                    ...prev,
+                    pageIndex: prev.pageIndex + 1,
+                  }
+                })
+              }}
               className="flex items-center gap-1 rounded-tr-md rounded-br-md border-1 border-l-[0.5px] border-l-white/40 bg-npa-charcoal-300 px-3 py-2 text-npa-charcoal-25 transition-all duration-200 disabled:cursor-not-allowed disabled:bg-npa-neutral-50 disabled:text-npa-neutral-400/80 hover:[&:not(:disabled)]:bg-npa-charcoal-400 hover:[&:not(:disabled)]:text-npa-neutral-25"
             >
               Next
