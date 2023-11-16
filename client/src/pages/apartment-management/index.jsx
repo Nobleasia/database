@@ -1,7 +1,7 @@
 import Head from "next/head"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { useEffect, useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import { Controller, useForm, useWatch } from "react-hook-form"
 import { AiFillPlusCircle } from "react-icons/ai"
 import { MdSearch, MdViewColumn } from "react-icons/md"
@@ -181,6 +181,17 @@ const ApartementManagement = ({ showColumnFieldItems }) => {
     ]
 
     setColumnFilters(columnFilters)
+
+    const queryParams = {
+      ...router.query,
+      page: 1, // Reset page to 1 when filters change
+      filters: JSON.stringify(filtersValues), // Store filters in query params
+    }
+
+    router.push({
+      pathname: router.pathname,
+      query: queryParams,
+    })
   }
 
   return (

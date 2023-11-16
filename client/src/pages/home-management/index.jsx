@@ -1,5 +1,6 @@
 import Head from "next/head"
 import Link from "next/link"
+import { useRouter } from "next/router"
 import { useMemo, useState } from "react"
 import { Controller, useForm, useWatch } from "react-hook-form"
 import { AiFillPlusCircle } from "react-icons/ai"
@@ -33,6 +34,7 @@ import {
 } from "@/features/home-management"
 
 const HomeManagement = ({ showColumnFieldItems }) => {
+  const router = useRouter()
   const { auth } = useAuth()
   const instance = useAxiosPrivate()
   const { toast, handleToggleToast } = useHandleToast()
@@ -201,6 +203,17 @@ const HomeManagement = ({ showColumnFieldItems }) => {
     ]
 
     setColumnFilters(columnFilters)
+
+    const queryParams = {
+      ...router.query,
+      page: 1, // Reset page to 1 when filters change
+      filters: JSON.stringify(filtersValues), // Store filters in query params
+    }
+
+    router.push({
+      pathname: router.pathname,
+      query: queryParams,
+    })
   }
 
   return (
