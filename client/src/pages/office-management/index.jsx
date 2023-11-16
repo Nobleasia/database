@@ -1,7 +1,7 @@
 import Head from "next/head"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Controller, useForm, useWatch } from "react-hook-form"
 import { AiFillPlusCircle } from "react-icons/ai"
 import { MdSearch, MdViewColumn } from "react-icons/md"
@@ -176,6 +176,20 @@ const OfficeManagement = ({ showColumnFieldItems }) => {
       query: queryParams,
     })
   }
+
+  useEffect(() => {
+    const queryParams = router.query
+
+    if (queryParams.filters) {
+      const parsedFilters = JSON.parse(queryParams.filters)
+
+      Object.keys(parsedFilters).forEach((key) => {
+        setValue(`filter.${key}`, parsedFilters[key])
+      })
+
+      handleApplyingFilter(parsedFilters)
+    }
+  }, [])
 
   return (
     <>

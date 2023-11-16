@@ -51,7 +51,7 @@ const tabsDetails = [
 ]
 
 export const ViewHomeLayout = ({ children }) => {
-  const { query } = useRouter()
+  const { query, back } = useRouter()
   const { homeAttributes, homeDataIsLoading } = useViewHomeData()
   const fetchBlob = useFetchBlob()
 
@@ -109,9 +109,9 @@ export const ViewHomeLayout = ({ children }) => {
       </Head>
       <HeaderPage>
         <div className="flex items-center gap-4">
-          <Link href="/home-management">
+          <button type="button" onClick={() => back()}>
             <MdArrowBack className="h-5 w-5" />
-          </Link>
+          </button>
           <TitlePage>View Home</TitlePage>
         </div>
 
