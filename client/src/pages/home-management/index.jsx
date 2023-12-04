@@ -216,8 +216,44 @@ const HomeManagement = ({ showColumnFieldItems }) => {
     })
   }
 
+  const handleSearchChange = (searchQuery) => {
+    const queryParams = {
+      ...router.query,
+      page: 1, // Reset page to 1 when filters change
+      search: searchQuery,
+    }
+
+    router.push({
+      pathname: router.pathname,
+      query: queryParams,
+    })
+  }
+
   useEffect(() => {
-    const queryParams = router.query
+    const queryParams = {
+      ...router.query,
+      page: 1,
+      search: queryWatch, // Update the search parameter with queryWatch
+    }
+
+    router.push({
+      pathname: router.pathname,
+      query: queryParams,
+    })
+  }, [queryWatch])
+
+  useEffect(() => {
+    const queryParams = {
+      ...router.query,
+    }
+
+    if (queryParams.search) {
+      const parsedSearchQuery = queryParams.search
+
+      setValue("query", parsedSearchQuery)
+
+      handleSearchChange(parsedSearchQuery)
+    }
 
     if (queryParams.filters) {
       const parsedFilters = JSON.parse(queryParams.filters)

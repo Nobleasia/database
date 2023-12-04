@@ -167,8 +167,44 @@ const LandManagement = ({ showColumnFieldItems }) => {
     })
   }
 
+  const handleSearchChange = (searchQuery) => {
+    const queryParams = {
+      ...router.query,
+      page: 1, // Reset page to 1 when filters change
+      search: searchQuery,
+    }
+
+    router.push({
+      pathname: router.pathname,
+      query: queryParams,
+    })
+  }
+
   useEffect(() => {
-    const queryParams = router.query
+    const queryParams = {
+      ...router.query,
+      page: 1,
+      search: queryWatch, // Update the search parameter with queryWatch
+    }
+
+    router.push({
+      pathname: router.pathname,
+      query: queryParams,
+    })
+  }, [queryWatch])
+
+  useEffect(() => {
+    const queryParams = {
+      ...router.query,
+    }
+
+    if (queryParams.search) {
+      const parsedSearchQuery = queryParams.search
+
+      setValue("query", parsedSearchQuery)
+
+      handleSearchChange(parsedSearchQuery)
+    }
 
     if (queryParams.filters) {
       const parsedFilters = JSON.parse(queryParams.filters)
@@ -196,7 +232,7 @@ const LandManagement = ({ showColumnFieldItems }) => {
       </HeaderPage>
 
       <ToastProvider swipeDirection="right" duration={1500}>
-        <section className="flex flex-col gap-5 rounded-md bg-white p-5">
+        <section className="flex flex-col gap-5 p-5 bg-white rounded-md">
           <div className="grid h-max grid-rows-[max-content_max-content] gap-5 lg:grid-rows-1 xl:max-h-12 xl:grid-cols-[2fr_1fr]">
             <div className="grid grid-rows-3 gap-3 lg:grid-cols-[1fr_max-content_1fr] lg:grid-rows-1">
               <Controller
@@ -211,7 +247,7 @@ const LandManagement = ({ showColumnFieldItems }) => {
                     isTouched={isTouched}
                     isError={error}
                   >
-                    <MdSearch className="h-8 w-8 text-neutral-700" />
+                    <MdSearch className="w-8 h-8 text-neutral-700" />
                   </InputField>
                 )}
               />
@@ -242,7 +278,7 @@ const LandManagement = ({ showColumnFieldItems }) => {
                     placeholder={
                       <span className="flex items-center gap-3 font-medium text-npa-neutral-700">
                         <div className="h-max w-max">
-                          <MdViewColumn className="h-6 w-6" />
+                          <MdViewColumn className="w-6 h-6" />
                         </div>
                         Show Column
                       </span>
@@ -251,14 +287,14 @@ const LandManagement = ({ showColumnFieldItems }) => {
                 )}
               />
             </div>
-            <div className="flex h-max flex-col items-center gap-4 lg:flex-row xl:h-full xl:justify-end">
+            <div className="flex flex-col items-center gap-4 h-max lg:flex-row xl:h-full xl:justify-end">
               <Link
                 href="/land-management/property-partialan"
                 className="flex w-full items-center rounded-md bg-npa-info-300 p-[10px] text-center font-semibold text-npa-neutral-25 transition-all duration-200 hover:bg-npa-info-400 active:bg-npa-info-500 lg:h-full lg:w-max"
               >
                 <Button
                   variant="custom"
-                  className="h-full w-full text-center"
+                  className="w-full h-full text-center"
                   tabIndex={-1}
                 >
                   Property Particular
@@ -274,7 +310,7 @@ const LandManagement = ({ showColumnFieldItems }) => {
                     className="inline-flex items-center gap-2"
                     tabIndex={-1}
                   >
-                    <AiFillPlusCircle className="h-5 w-5" />
+                    <AiFillPlusCircle className="w-5 h-5" />
                     <span>Add Property</span>
                   </Button>
                 </Link>

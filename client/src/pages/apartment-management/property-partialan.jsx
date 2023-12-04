@@ -424,14 +424,12 @@ const PropertyPartialan = ({ columns }) => {
         <HeaderPage>
           <div className="flex items-center gap-4">
             <Link href="/apartment-management">
-              <MdArrowBack className="h-5 w-5" />
+              <MdArrowBack className="w-5 h-5" />
             </Link>
             <TitlePage>Property Particular</TitlePage>
           </div>
           <BreadcrumbsContainer>
-            <BreadcrumbsItem href="/apartment-management" disabled>
-              Apartment Management
-            </BreadcrumbsItem>
+            <BreadcrumbsItem disabled>Apartment Management</BreadcrumbsItem>
           </BreadcrumbsContainer>
         </HeaderPage>
 
@@ -445,7 +443,7 @@ const PropertyPartialan = ({ columns }) => {
           />
         )}
 
-        <section className="flex flex-col rounded-md bg-white p-5">
+        <section className="flex flex-col p-5 bg-white rounded-md">
           <div className="flex flex-col gap-2">
             <h2 className="text-lg font-semibold">
               Property Particular Properties
@@ -539,7 +537,7 @@ const PropertyPartialan = ({ columns }) => {
                   </div>
                   <div className="flex flex-col gap-2">
                     <h4 className="font-medium">Selected columns:</h4>
-                    <ul className="grid w-full list-inside list-disc grid-cols-2 gap-x-6 gap-y-2 overflow-x-auto sm:grid-cols-4 lg:w-max lg:grid-flow-col lg:grid-cols-5 lg:grid-rows-5 lg:gap-x-8">
+                    <ul className="grid w-full grid-cols-2 overflow-x-auto list-disc list-inside gap-x-6 gap-y-2 sm:grid-cols-4 lg:w-max lg:grid-flow-col lg:grid-cols-5 lg:grid-rows-5 lg:gap-x-8">
                       <PropertyPartialanSelectedColumnItemsMemoize
                         selectedColumnsObject={selectedColumnsObject}
                         columns={columns}
@@ -562,7 +560,7 @@ const PropertyPartialan = ({ columns }) => {
                       {dataGroup &&
                       dataGroup.photos &&
                       dataGroup.photos.length === 0 ? (
-                        <h3 className="w-max rounded-sm bg-npa-info-600/20 p-3 text-sm text-npa-info-800">
+                        <h3 className="p-3 text-sm rounded-sm w-max bg-npa-info-600/20 text-npa-info-800">
                           There are no available photos for {kodePropar.label}
                         </h3>
                       ) : (
@@ -612,7 +610,7 @@ const PropertyPartialan = ({ columns }) => {
           </div>
 
           {watchKodePropar.length > 0 && (
-            <div className="flex place-items-end items-center justify-end gap-2">
+            <div className="flex items-center justify-end gap-2 place-items-end">
               <Button
                 isFullWidth={false}
                 variant="custom"

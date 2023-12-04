@@ -92,7 +92,7 @@ const SpecificationAndTerms = () => {
             <h4 className="text-npa-neutral-500">Lease Terms</h4>
             <p className="flex items-center gap-1">
               <span>{officeAttributes?.lease_term_time}</span>
-              <span>{`${officeAttributes?.lease_term_type} ${
+              <span>{`${
                 officeAttributes?.lease_term_time > 1
                   ? `${officeAttributes?.lease_term_type}(s)`
                   : officeAttributes?.lease_term_type
@@ -103,9 +103,9 @@ const SpecificationAndTerms = () => {
             <h4 className="text-npa-neutral-500">Payment Terms</h4>
             <p>{officeAttributes?.property_payment_term?.payment_term}</p>
           </div>
-          <div className="flex flex-col gap-2 whitespace-nowrap font-medium text-neutral-900 lg:whitespace-pre-wrap">
+          <div className="flex flex-col gap-2 font-medium whitespace-nowrap text-neutral-900 lg:whitespace-pre-wrap">
             <h4 className="text-npa-neutral-500">Tax Fees</h4>
-            <ul className="flex list-inside list-disc flex-col gap-2">
+            <ul className="flex flex-col gap-2 list-disc list-inside">
               {officeAttributes?.vat_details ? (
                 <li>{officeAttributes?.vat_details}</li>
               ) : (
@@ -136,7 +136,7 @@ const SpecificationAndTerms = () => {
                   key={id}
                 >
                   <AccordionHeader>
-                    <AccordionTrigger className="w-max gap-12 py-2 font-medium text-npa-neutral-500">
+                    <AccordionTrigger className="gap-12 py-2 font-medium w-max text-npa-neutral-500">
                       {title}
                     </AccordionTrigger>
                   </AccordionHeader>

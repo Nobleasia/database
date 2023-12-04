@@ -91,7 +91,7 @@ export const ApartmentTableControl = ({
         }
       })
     }
-  }, [])
+  }, [pageSizeWatch])
 
   const table = useReactTable({
     data: tableData,
@@ -146,7 +146,7 @@ export const ApartmentTableControl = ({
           disabled={isLoading || data.length <= 0}
         />
 
-        <div className="flex h-max flex-col items-center gap-2">
+        <div className="flex flex-col items-center gap-2 h-max">
           <div className="flex flex-col gap-1 text-center">
             <p>
               Showing page{" "}
@@ -184,7 +184,7 @@ export const ApartmentTableControl = ({
               }}
               className="flex items-center gap-1 rounded-tl-md rounded-bl-md border-1 border-r-[0.5px] border-r-white/40 bg-npa-charcoal-300 px-3 py-2 text-npa-charcoal-25 transition-all duration-200 disabled:cursor-not-allowed disabled:bg-npa-neutral-50 disabled:text-npa-neutral-400/80 hover:[&:not(:disabled)]:bg-npa-charcoal-400 hover:[&:not(:disabled)]:text-npa-neutral-25"
             >
-              <MdOutlineArrowRightAlt className="h-6 w-6 rotate-180" />
+              <MdOutlineArrowRightAlt className="w-6 h-6 rotate-180" />
               Prev
             </Button>
 
@@ -204,7 +204,7 @@ export const ApartmentTableControl = ({
               className="flex items-center gap-1 rounded-tr-md rounded-br-md border-1 border-l-[0.5px] border-l-white/40 bg-npa-charcoal-300 px-3 py-2 text-npa-charcoal-25 transition-all duration-200 disabled:cursor-not-allowed disabled:bg-npa-neutral-50 disabled:text-npa-neutral-400/80 hover:[&:not(:disabled)]:bg-npa-charcoal-400 hover:[&:not(:disabled)]:text-npa-neutral-25"
             >
               Next
-              <MdOutlineArrowRightAlt className="h-6 w-6" />
+              <MdOutlineArrowRightAlt className="w-6 h-6" />
             </Button>
           </div>
         </div>
