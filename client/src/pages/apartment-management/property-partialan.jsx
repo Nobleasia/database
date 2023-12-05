@@ -429,7 +429,9 @@ const PropertyPartialan = ({ columns }) => {
             <TitlePage>Property Particular</TitlePage>
           </div>
           <BreadcrumbsContainer>
-            <BreadcrumbsItem disabled>Apartment Management</BreadcrumbsItem>
+            <BreadcrumbsItem href="/apartment-management" disabled>
+              Apartment Management
+            </BreadcrumbsItem>
           </BreadcrumbsContainer>
         </HeaderPage>
 
