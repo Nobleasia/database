@@ -9,7 +9,7 @@ const nextConfig = {
     },
   },
   images: {
-    domains: ["api.nobleasia.id"],
+    domains: ["api.nobleasia.id", "database.nobleasia.id"],
   },
 }
 

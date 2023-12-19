@@ -27,6 +27,11 @@ import {
 const Information = ({ available }) => {
   const config = useSWRConfig()
 
+  const { data: kodeProparData } = usePrivateFetcher(
+    [process.env.NEXT_PUBLIC_ENDPOINT_OFFICE_KODE_PROPAR_READ, {}],
+    config
+  )
+
   const { data: propertyAreaData, isLoading: isLoadingPropertyArea } =
     usePrivateFetcher(
       [process.env.NEXT_PUBLIC_ENDPOINT_PROPERTY_AREA_READ, {}],
@@ -131,7 +136,7 @@ const Information = ({ available }) => {
 
   if (isLoadingPropertyArea || picDataIsLoading) {
     return (
-      <div className="flex h-full w-full items-center justify-center">
+      <div className="flex items-center justify-center w-full h-full">
         <Loader />
       </div>
     )
@@ -170,32 +175,41 @@ const Information = ({ available }) => {
                   isError={error}
                   onChange={(event) => {
                     const { value } = event.target
-
+                    const enteredValue = value.toUpperCase()
                     const isCustomInvalid =
                       value.match(/^[A-Z]{1,7}[0-9]{3}$/g) === null
 
-                    if (value.length > 0) {
-                      if (isCustomInvalid) {
-                        setError("kode_propar", {
-                          type: "custom",
-                          message: `The total character must not be more than 10, the last 3
-                               characters of kode_propar must be digits, NaN, and the rest of
-                               the characters must be capitalized letters.
-                               Example: AMP001`,
-                        })
-                      } else {
-                        clearErrors("kode_propar")
-                      }
-                    }
+                    const isExistingKodePropar =
+                      kodeProparData &&
+                      kodeProparData?.data?.attributes?.some(
+                        (item) => item.kode_propar === enteredValue
+                      )
 
                     if (value.length === 0) {
                       setError("kode_propar", {
                         type: "custom",
                         message: "Kode propar is required",
                       })
+                    } else if (isCustomInvalid) {
+                      setError("kode_propar", {
+                        type: "custom",
+                        message: `The total character must not be more than 10, the last 3
+                                  characters of kode_propar must be digits, NaN, and the rest of
+                                  the characters must be capitalized letters.
+                                  Example: AMP001`,
+                      })
+                    } else if (isExistingKodePropar) {
+                      setError("kode_propar", {
+                        type: "custom",
+                        message: "Kode Propar already exists",
+                      })
+                    } else {
+                      // Clear error before checking for existing kodeProparData
+                      clearErrors("kode_propar")
                     }
 
-                    field.onChange(event.target.value.toUpperCase())
+                    // Trigger field onChange with uppercase value
+                    field.onChange(enteredValue)
                   }}
                 />
                 {error ? (

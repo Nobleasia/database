@@ -94,8 +94,8 @@ export const generatePDF = async (response, instance) => {
           >
             <Image
               key="logo"
-              src="https://iili.io/Hs06b9t.png"
-              style={{ width: 82, height: 50 }}
+              src="https://database.nobleasia.id/images/npa-logo-full.png"
+              style={{ width: 200, height: 50, objectFit: "cover" }}
             />
             <View style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               <Text style={{ fontSize: 12, fontWeight: "bold" }}>

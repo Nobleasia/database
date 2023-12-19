@@ -148,8 +148,8 @@ const Login = () => {
         </picture>
 
         <div className="flex h-max max-w-xl flex-col gap-4 rounded-2xl bg-white p-6 shadow-xl xs:gap-8 sm:p-10 md:h-full md:max-w-none md:justify-center md:rounded-none xl:gap-10">
-          <div className="flex flex-col items-center gap-4 xs:gap-8 xl:gap-10">
-            <picture className="relative h-24 w-32 overflow-hidden xs:h-32 xs:w-44">
+          <div className="flex flex-col items-center gap-4 md:gap-6">
+            <picture className="relative h-24 w-32 overflow-hidden md:h-48 md:w-72">
               <Image
                 src="/images/npa-logo-full.png"
                 placeholder="blur"

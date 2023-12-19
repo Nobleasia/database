@@ -127,7 +127,7 @@ const Information = ({ available }) => {
 
   if (isLoadingPropertyArea || picDataIsLoading) {
     return (
-      <div className="flex h-full w-full items-center justify-center">
+      <div className="flex items-center justify-center w-full h-full">
         <Loader />
       </div>
     )
@@ -144,7 +144,6 @@ const Information = ({ available }) => {
           name="kode_propar"
           rules={{
             required: "Kode propar is required",
-
             pattern: {
               value: /^[A-Z]{1,7}[0-9]{3}$/g,
               message: `The total character must not be more than 10, the last 3
