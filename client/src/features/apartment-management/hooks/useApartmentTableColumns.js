@@ -131,7 +131,10 @@ export const useApartmentTableColumns = ({
         id: "picRole",
         accessorKey: "property_person_in_charge",
         cell: (info) => {
-          if (info.getValue() !== null) {
+          if (
+            info.getValue() !== null &&
+            info.getValue().property_person_in_charge_role !== null
+          ) {
             const { name } = info.getValue().property_person_in_charge_role
             return name
           }
@@ -247,7 +250,7 @@ export const useApartmentTableColumns = ({
         accessorKey: "facilities",
         cell: (info) => {
           return (
-            <ul className="list-item list-inside">
+            <ul className="list-inside list-item">
               {info
                 .getValue()
                 .map(

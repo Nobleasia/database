@@ -102,10 +102,14 @@ export const useLandTableColumns = ({
         id: "picRole",
         accessorKey: "property_person_in_charge",
         cell: (info) => {
-          const propertyPersonInChargeRole =
-            info.getValue()?.property_person_in_charge_role
-          const name = propertyPersonInChargeRole?.name
-          return name || "Unknown" // Provide a default value if 'name' is null
+          if (
+            info.getValue() !== null &&
+            info.getValue().property_person_in_charge_role !== null
+          ) {
+            const { name } = info.getValue().property_person_in_charge_role
+            return name
+          }
+          return null
         },
         header: () => "PIC Role",
       },

@@ -140,8 +140,6 @@ const Information = ({ available }) => {
     )
   }
 
-  console.log(kodeProparData)
-
   return (
     <>
       <ApartmentManagementGroupInput>

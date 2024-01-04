@@ -118,8 +118,14 @@ export const useOfficeTableColumns = ({
         id: "picRole",
         accessorKey: "property_person_in_charge",
         cell: (info) => {
-          const { name } = info.getValue().property_person_in_charge_role
-          return name
+          if (
+            info.getValue() !== null &&
+            info.getValue().property_person_in_charge_role !== null
+          ) {
+            const { name } = info.getValue().property_person_in_charge_role
+            return name
+          }
+          return null
         },
         header: () => "PIC Role",
       },
@@ -267,7 +273,7 @@ export const useOfficeTableColumns = ({
         accessorKey: "facilities",
         cell: (info) => {
           return (
-            <ul className="list-item list-inside">
+            <ul className="list-inside list-item">
               {info
                 .getValue()
                 .map(
