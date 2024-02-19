@@ -51,6 +51,17 @@ export const useLandTableColumns = ({
         filterFn: filterArrIncludesSome,
       },
       {
+        id: "price",
+        accessorFn: (row) => [row.price],
+        cell: (info) => {
+          const [price] = info.getValue()
+          return `${convertNumberToPriceFormat(price, "Rupiah")} /sqm`
+        },
+        header: () => "Price",
+        enableColumnFilter: true,
+        filterFn: filterPricingInNumberRange,
+      },
+      {
         id: "landSize",
         accessorKey: "land_size",
         header: () => "Land Size (sqm)",
@@ -121,17 +132,6 @@ export const useLandTableColumns = ({
           return phoneNumber
         },
         header: () => "PIC Phone Number",
-      },
-      {
-        id: "price",
-        accessorFn: (row) => [row.price],
-        cell: (info) => {
-          const [price] = info.getValue()
-          return `${convertNumberToPriceFormat(price, "Rupiah")} /sqm`
-        },
-        header: () => "Price",
-        enableColumnFilter: true,
-        filterFn: filterPricingInNumberRange,
       },
       {
         id: "paymentTerms",

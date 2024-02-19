@@ -57,6 +57,17 @@ export const useApartmentTableColumns = ({
         filterFn: filterArrIncludesSome,
       },
       {
+        id: "sellingPrice",
+        accessorFn: (row) => [row.selling_price, row.price_currency],
+        cell: (info) => {
+          const [price, currency] = info.getValue()
+          return convertNumberToPriceFormat(price, currency)
+        },
+        header: () => "Selling Price",
+        enableColumnFilter: true,
+        filterFn: filterPricingInNumberRange,
+      },
+      {
         id: "size",
         accessorKey: "size",
         header: () => "Size (sqm)",
@@ -169,17 +180,6 @@ export const useApartmentTableColumns = ({
           return `${convertNumberToPriceFormat(price, currency)} /month`
         },
         header: () => "Rental Price",
-        enableColumnFilter: true,
-        filterFn: filterPricingInNumberRange,
-      },
-      {
-        id: "sellingPrice",
-        accessorFn: (row) => [row.selling_price, row.price_currency],
-        cell: (info) => {
-          const [price, currency] = info.getValue()
-          return convertNumberToPriceFormat(price, currency)
-        },
-        header: () => "Selling Price",
         enableColumnFilter: true,
         filterFn: filterPricingInNumberRange,
       },

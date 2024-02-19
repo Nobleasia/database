@@ -57,6 +57,17 @@ export const useOfficeTableColumns = ({
         filterFn: filterArrIncludesSome,
       },
       {
+        id: "sellingPrice",
+        accessorFn: (row) => [row.selling_price, row.price_currency],
+        cell: (info) => {
+          const [price, currency] = info.getValue()
+          return `${convertNumberToPriceFormat(price, currency)} /sqm`
+        },
+        header: () => "Selling Price",
+        enableColumnFilter: true,
+        filterFn: filterPricingInNumberRange,
+      },
+      {
         id: "buildingCompletion",
         accessorKey: "building_completion",
         header: () => "Bulding Completion",
@@ -156,17 +167,7 @@ export const useOfficeTableColumns = ({
         enableColumnFilter: true,
         filterFn: filterPricingInNumberRange,
       },
-      {
-        id: "sellingPrice",
-        accessorFn: (row) => [row.selling_price, row.price_currency],
-        cell: (info) => {
-          const [price, currency] = info.getValue()
-          return `${convertNumberToPriceFormat(price, currency)} /sqm`
-        },
-        header: () => "Selling Price",
-        enableColumnFilter: true,
-        filterFn: filterPricingInNumberRange,
-      },
+
       {
         id: "serviceCharge",
         accessorFn: (row) => [row.service_charge_price, row.price_currency],
