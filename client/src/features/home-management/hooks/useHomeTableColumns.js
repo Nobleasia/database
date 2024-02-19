@@ -68,6 +68,17 @@ export const useHomeTableColumns = ({
         filterFn: filterPricingInNumberRange,
       },
       {
+        id: "rentalPrice",
+        accessorFn: (row) => [row.rental_price, row.price_currency],
+        cell: (info) => {
+          const [price, currency] = info.getValue()
+          return `${convertNumberToPriceFormat(price, currency)} /month`
+        },
+        header: () => "Rental Price",
+        enableColumnFilter: true,
+        filterFn: filterPricingInNumberRange,
+      },
+      {
         id: "landSize",
         accessorKey: "land_size",
         header: () => "Land Size (sqm)",
@@ -217,17 +228,6 @@ export const useHomeTableColumns = ({
         header: () => "Price Currency",
         enableColumnFilter: true,
         filterFn: filterArrIncludesSome,
-      },
-      {
-        id: "rentalPrice",
-        accessorFn: (row) => [row.rental_price, row.price_currency],
-        cell: (info) => {
-          const [price, currency] = info.getValue()
-          return `${convertNumberToPriceFormat(price, currency)} /month`
-        },
-        header: () => "Rental Price",
-        enableColumnFilter: true,
-        filterFn: filterPricingInNumberRange,
       },
       {
         id: "compoudFee",
